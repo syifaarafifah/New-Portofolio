@@ -50,7 +50,7 @@ body {
 
 /* SIDEBAR SMARTPHONE STYLES - iPhone style */
 .sidebar {
-  width: 340px;
+  width: 300px;
   min-width: 300px;
   background: var(--iphone-gray);
   color: var(--iphone-dark);
