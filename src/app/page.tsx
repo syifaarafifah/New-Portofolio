@@ -445,10 +445,9 @@ export default function Home() {
                 <div className="cloud cloud-3">☁️</div>
                 <div className="cloud cloud-4">☁️</div>
               </div>
-              <h1 className="hero-heading" style={{ color: '#1E40AF' }}>I'm a Software Engineering Student & Front-End Developer</h1>
-
-              <div className="hero-links">
-              </div>
+              <h1 className="hero-heading" style={{ color: '#1E40AF' }}>
+                {"I'm a Software Engineering Student & Front-End Developer"}
+              </h1>
             </div>
 
           {/* About Section dengan foto yang diperbesar */}
