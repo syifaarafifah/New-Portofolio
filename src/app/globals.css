@@ -52,7 +52,7 @@ body {
 /* SIDEBAR SMARTPHONE STYLES - iPhone style */
 .sidebar {
   width: 250px;
-  min-width: 300px;
+  min-width: 270px;
   background: var(--iphone-gray);
   color: var(--iphone-dark);
   padding: 0;
@@ -882,7 +882,7 @@ body {
   color: #5a5a5a;
   font-size: 0.95rem;
   line-height: 1.7;
-  max-width: 800px;
+  max-width: 500px;
 }
 
 .about-text p {
@@ -1585,8 +1585,8 @@ body {
   }
 
   .profile-frame:hover {
-    transform: scale(1.03); /* Efek zoom halus saat hover */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transform: scale(1.03); /* Zoom halus */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Tambahkan warna shadow lengkap */
   }
 
   .profile-photo {
