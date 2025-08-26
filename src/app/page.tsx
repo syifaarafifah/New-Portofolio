@@ -271,7 +271,18 @@ export default function Home() {
             
             {/* Informasi Profil dengan warna biru modern */}
             <div className="profile-info-tech">
-              <h1 className="profile-name-tech" style={{ color: '#1E40AF', background: 'linear-gradient(135deg, #3B82F6, #1E3A8A)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>I'M SYIFA RAFIFAH</h1>
+              <h1
+                className="profile-name-tech"
+                style={{
+                  color: '#1E40AF',
+                  background: 'linear-gradient(135deg, #3B82F6, #1E3A8A)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                I&apos;m SYIFA RAFIFAH
+              </h1>              
               <div className="profile-title-tech">
                 <span className="title-glow" style={{ color: '#3B82F6' }}>Front-End Developer</span>
               </div>
