@@ -281,7 +281,7 @@ export default function Home() {
                   backgroundClip: 'text',
                 }}
               >
-                I&apos;m SYIFA RAFIFAH
+                SYIFA RAFIFAH
               </h1>              
               <div className="profile-title-tech">
                 <span className="title-glow" style={{ color: '#3B82F6' }}>Front-End Developer</span>
