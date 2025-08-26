@@ -453,7 +453,7 @@ export default function Home() {
           {/* About Section dengan foto yang diperbesar */}
           <div id="about" className="content-section">
             <div className="section-divider"></div>
-            <h2 className="section-header" style={{ color: '#1E40AF' }}>ABOUT</h2>
+            <h2 className="section-header" style={{ color: '#1E40AF', fontFamily: 'Calibri, "Gill Sans", "Gill Sans MT", sans-serif' }}>ABOUT</h2>
 
             <div className="about-container">
               <div className="profile-image-container">
@@ -478,7 +478,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="about-text">
+              <div className="about-text" style={{ fontFamily: 'Calibri, "Gill Sans", "Gill Sans MT", sans-serif' }}>
                 <p>
                   I am a fifth-semester Software Engineering Technology
                   student at Batam State Polytechnic with a background in web
@@ -495,8 +495,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-          </div>
- 
+          </div> 
             {/* Projects Section */}
             <div id="projects" className="content-section">
               <div className="section-divider"></div>
