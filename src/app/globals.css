@@ -1476,15 +1476,19 @@ body {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 460px) {
   .sidebar {
-    width: 280px;
-    min-width: 280px;
-    border-radius: 30px;
-    margin: 5px auto;
-    padding: 0;
-    border: 7px solid #1c1c1e;
+    width: 80%;
+    min-width: unset;
+    max-width: 300px;
+    border-radius: 15px;
+    margin: 4px auto;
+    padding: 15px;
+    border: 4px solid #1c1c1e;
+    height: px;
+    min-height: 200px;
   }
+}
 
   .sidebar-heading {
     font-size: 1.25rem;
@@ -1527,7 +1531,7 @@ body {
   .app-name {
     font-size: 0.7rem;
   }
-}
+
 
 /* ===== UTILITY CLASSES ===== */
 .cursor-pointer {
