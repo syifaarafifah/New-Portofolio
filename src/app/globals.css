@@ -72,14 +72,12 @@ body {
 .sidebar::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 50%;
+  top: 0; /* Posisi di atas layar */
+  left: 50%; /* Tengah horizontal */
   transform: translateX(-50%);
-  width: 50%;
-  height: 10px;
-  background: #1c1c1e;
-  border-radius: 0 0 20px 20px;
-  z-index: 11;
+  width: 55px; /* Lebar notch, bisa disesuaikan */
+  height: 7px; /* Tinggi notch */
+  z-index: 11; /* Agar berada di bawah Dynamic Island */
 }
 
 .sidebar-heading {
@@ -109,7 +107,7 @@ body {
   padding: 10px 20px;
   background: transparent;
   height: 5px;
-  margin-top: 30px;
+  margin-top: 7px;
   font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
@@ -131,29 +129,6 @@ body {
   color: #000;
 }
 
-/* Dynamic Island */
-.dynamic-island {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 35px;
-  background: #1c1c1e;
-  border-radius: 20px;
-  z-index: 12;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-
-.dynamic-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #fff;
-}
 
 /* Phone Content */
 .phone-content {
@@ -1481,10 +1456,10 @@ body {
     width: 85%;
     min-width: unset;
     max-width: 320px;
-    border-radius: 15px;
+    border-radius: 25px;
     margin: 4px auto;
     padding: 15px;
-    border: 4px solid #1c1c1e;
+    border: 7px solid #1c1c1e;
     height: px;
     min-height: 200px;
   }
@@ -1910,4 +1885,54 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Container smartphone (opsional, untuk simulasi) */
+.phone-frame {
+  position: relative;
+  width: 375px;  /* lebar iPhone mini/standar */
+  height: 812px; /* tinggi iPhone */
+  margin: 50px auto;
+  background: #000;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+ /* Dynamic Island */
+        .dynamic-island {
+          position: absolute;
+          top: 12px; /* floating sedikit di atas status bar */
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100px;
+          height: 25px;
+          background: #1c1c1e;
+          border-radius: 20px;
+          z-index: 25; /* pastikan di atas status bar */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Titik kecil di Dynamic Island */
+        .dynamic-dot {
+          width: 4px;
+          height: 2px;
+          border-radius: 30%;
+          background: #8294c3;
+        }
+
+/* Notch simulasi (background layar, di bawah Dynamic Island) */
+.notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 34px;
+  background: #1c1c1e;
+  border-radius: 0 0 20px 20px;
+  z-index: 10; /* di bawah Dynamic Island */
 }

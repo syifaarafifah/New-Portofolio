@@ -1,95 +1,147 @@
 import React from 'react';
-import './Skills.css';
 
 const Skills: React.FC = () => {
   // Hard skills organized by category
-  const hardSkills = [
-    { category: "Web Development", skills: ["HTML", "CSS", "JavaScript", "Laravel", "Next.js"] },
-    { category: "Mobile Development", skills: ["React Native", "AppSheet"] },
-    { category: "Database", skills: ["MySQL", "PhpMyAdmin", "PHP"] },
-    { category: "UI/UX Design", skills: ["Figma", "Canva"] },
-    { category: "Office Tools", skills: ["Microsoft Word", "Microsoft Excel"] },
-    { category: "Tools", skills: ["Git", "GitHub"] },
-    { category: "Testing", skills: ["Functional Testing", "UI/UX Testing", "Security Testing"] }
-  ];
-
-  // Soft skills
-  const softSkills = [
-    "Team Collaboration",
-    "Data & Document Management",
-    "Public Speaking",
-    "Problem Solving",
-    "Project Coordination",
-    "Adaptability",
-    "Detail-Oriented"
-  ];
+  const skills = {
+    technical: [
+      { name: "HTML", icon: "🟧" },
+      { name: "CSS", icon: "🟦" },
+      { name: "JavaScript", icon: "🟨" },
+      { name: "Laravel", icon: "🔴" },
+      { name: "Next.js", icon: "⚫" },
+      { name: "React Native", icon: "🔵" },
+      { name: "PHP", icon: "🟣" },
+      { name: "MySQL", icon: "🔶" },
+      { name: "Figma", icon: "🟢" },
+      { name: "Git", icon: "🔺" },
+      { name: "AppSheet", icon: "🟩" },
+      { name: "TypeScript", icon: "🔷" },
+      { name: "Tailwind CSS", icon: "🦋" },
+    ],
+    soft: [
+      { name: "Team Collaboration", icon: "👥" },
+      { name: "Problem Solving", icon: "💡" },
+      { name: "Project Management", icon: "📊" },
+      { name: "Adaptability", icon: "🔄" },
+      { name: "Attention to Detail", icon: "🔍" },
+      { name: "Communication", icon: "💬" },
+      { name: "Time Management", icon: "⏰" },
+    ],
+  };
 
   return (
-    <section id="skills" className="skills-section">
-      <div className="skills-container">
-        <h2 className="skills-main-title">
-          Skills
-          <div className="rabbit-animation">
-            <div className="rabbit">
-              <div className="rabbit-ear rabbit-ear-left"></div>
-              <div className="rabbit-ear rabbit-ear-right"></div>
-              <div className="rabbit-face">
-                <div className="rabbit-eye rabbit-eye-left"></div>
-                <div className="rabbit-eye rabbit-eye-right"></div>
-                <div className="rabbit-nose"></div>
-              </div>
-            </div>
+    <div style={{
+      padding: "2rem",
+      maxWidth: "1200px",
+      margin: "0 auto"
+    }}>
+      <h2 style={{
+        textAlign: "center",
+        marginBottom: "2rem",
+        color: "#1E40AF",
+        fontSize: "2.5rem",
+        fontWeight: "bold"
+      }}>
+        SKILLS
+      </h2>
+
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+        gap: "2rem",
+        marginBottom: "2rem"
+      }}>
+        <div style={{
+          background: "white",
+          borderRadius: "12px",
+          padding: "1.5rem",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          transition: "transform 0.3s ease"
+        }}>
+          <h3 style={{
+            color: "#1E40AF",
+            fontSize: "1.5rem",
+            marginBottom: "1rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            justifyContent: "center"
+          }}>
+            💻 TECHNICAL SKILLS
+          </h3>
+          <div style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "0.8rem",
+            justifyContent: "center"
+          }}>
+            {skills.technical.map((skill, index) => (
+              <span
+                key={`tech-${index}`}
+                style={{
+                  background: "#DBEAFE",
+                  color: "#1E40AF",
+                  padding: "0.5rem 1rem",
+                  borderRadius: "20px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  fontWeight: "500",
+                  transition: "all 0.3s ease"
+                }}
+              >
+                {skill.icon} {skill.name}
+              </span>
+            ))}
           </div>
-        </h2>
-        
-        <div className="skills-grid">
-          {/* Hard Skills Card */}
-          <div className="skill-card">
-            <div className="card-header">
-              <div className="icon-container hard-skill-icon">
-                <i className="fas fa-laptop-code"></i>
-              </div>
-              <h3 className="card-title">Hard Skills</h3>
-            </div>
-            
-            <div className="skills-category-container">
-              {hardSkills.map((category, index) => (
-                <div key={index} className="skill-category-group">
-                  <h4 className="skill-category-title">{category.category}</h4>
-                  <ul className="skills-list">
-                    {category.skills.map((skill, skillIndex) => (
-                      <li key={skillIndex} className="skill-item hard-skill-item">
-                        <span className="skill-bullet">✦</span>
-                        {skill}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Soft Skills Card */}
-          <div className="skill-card">
-            <div className="card-header">
-              <div className="icon-container soft-skill-icon">
-                <i className="fas fa-people-group"></i>
-              </div>
-              <h3 className="card-title">Soft Skills</h3>
-            </div>
-            
-            <ul className="soft-skills-list">
-              {softSkills.map((skill, index) => (
-                <li key={index} className="skill-item soft-skill-item">
-                  <span className="skill-bullet">❀</span>
-                  {skill}
-                </li>
-              ))}
-            </ul>
+        </div>
+
+        <div style={{
+          background: "white",
+          borderRadius: "12px",
+          padding: "1.5rem",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          transition: "transform 0.3s ease"
+        }}>
+          <h3 style={{
+            color: "#1E40AF",
+            fontSize: "1.5rem",
+            marginBottom: "1rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            justifyContent: "center"
+          }}>
+            👥 SOFT SKILLS
+          </h3>
+          <div style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "0.8rem",
+            justifyContent: "center"
+          }}>
+            {skills.soft.map((skill, index) => (
+              <span
+                key={`soft-${index}`}
+                style={{
+                  background: "#DBEAFE",
+                  color: "#1E40AF",
+                  padding: "0.5rem 1rem",
+                  borderRadius: "20px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  fontWeight: "500",
+                  transition: "all 0.3s ease"
+                }}
+              >
+                {skill.icon} {skill.name}
+              </span>
+            ))}
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

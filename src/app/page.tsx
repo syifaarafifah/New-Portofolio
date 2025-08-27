@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Experience from "./components/Experience";
-import Projects from "./components/Projects";
 import HeroLinks from "./components/HeroLinks";
 import BubbleBackground from "./components/BubbleBackground";
 import { experiences } from "./data/experience";
@@ -96,6 +95,143 @@ const skills = {
       icon: <FaChartBar className="text-blue-700" />,
     },
   ],
+};
+
+// Komponen Projects yang dipindahkan ke sini
+const Projects = () => {
+  return (
+    <div id="projects" className="content-section">
+      <div className="section-divider"></div>
+      <h2 className="section-header flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
+        <FaProjectDiagram style={{ color: '#1E40AF' }} />
+        PROJECTS
+      </h2>
+
+      <div className="projects-list">
+        {projects.map((project, index) => (
+          <div
+            key={`proj-${project.id}-${index}`}
+            className="project-item"
+          >
+            <div className="project-header">
+              <div>
+                <h3 className="project-title flex items-center gap-2" style={{ color: '#1E40AF' }}>
+                  <FaLaptopCode style={{ color: '#1E40AF' }} />
+                  {project.title}
+                </h3>
+                <p className="project-role">{project.role}</p>
+              </div>
+              <span className="project-period">{project.period}</span>
+            </div>
+
+            <div className="project-description">
+              <p>{project.description}</p>
+            </div>
+
+            {/* Project Gallery */}
+            <div className="project-gallery">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="gallery-item">
+                  Project Image {i + 1}
+                </div>
+              ))}
+            </div>
+
+            <div className="tech-tags">
+              {project.technologies.map((tech, techIndex) => (
+                <span
+                  key={`tech-${index}-${techIndex}`}
+                  className="tech-tag"
+                  style={{ background: '#DBEAFE', color: '#1E40AF' }}
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Komponen Skills yang dipindahkan ke sini
+const Skills = () => {
+  return (
+    <div id="skills" className="content-section">
+      <div className="section-divider"></div>
+      <h2 className="section-header flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
+        <FaBolt style={{ color: '#1E40AF' }} />
+        SKILLS
+      </h2>
+
+      <div className="skills-grid">
+        <div className="skill-category">
+          <h3 className="flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
+            <FaCode style={{ color: '#1E40AF' }} />
+            TECHNICAL SKILLS
+          </h3>
+          <div className="skills-list">
+            {skills.technical.map((skill, index) => (
+              <span
+                key={`tech-${index}`}
+                className="skill-item flex items-center gap-2"
+                style={{ background: '#DBEAFE', color: '#1E40AF' }}
+              >
+                {skill.icon}
+                {skill.name}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="skill-category">
+          <h3 className="flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
+            <FaUsers style={{ color: '#1E40AF' }} />
+            SOFT SKILLS
+          </h3>
+          <div className="skills-list">
+            {skills.soft.map((skill, index) => (
+              <span
+                key={`soft-${index}`}
+                className="skill-item flex items-center gap-2"
+                style={{ background: '#DBEAFE', color: '#1E40AF' }}
+              >
+                {skill.icon}
+                {skill.name}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Komponen Education yang dipindahkan ke sini
+const Education = () => {
+  return (
+    <div id="education" className="content-section">
+      <div className="section-divider"></div>
+      <h2 className="section-header flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
+        <FaGraduationCap style={{ color: '#082891ff' }} />
+        EDUCATION
+      </h2>
+
+      <div className="experience-item">
+        <div className="experience-period">2023 — PRESENT</div>
+        <h3 className="experience-title flex items-center gap-2" style={{ color: '#1E40AF' }}>
+          <IoMdSchool style={{ color: '#1E40AF' }} />
+          Diploma IV - Software Engineering Technology
+        </h3>
+        <p className="experience-company">Politeknik Negeri Batam</p>
+        <p className="experience-description">
+          Currently a fifth-semester student specializing in web and
+          mobile development.
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default function Home() {
@@ -234,9 +370,9 @@ export default function Home() {
       </div>
 
       {/* Lock Screen Overlay */}
-        {!isUnlocked && (
-          <LockScreen onUnlock={unlockPhone} isUnlocked={isUnlocked} />
-        )}
+      {!isUnlocked && (
+        <LockScreen onUnlock={unlockPhone} isUnlocked={isUnlocked} />
+      )}
 
       {/* Sidebar dengan desain smartphone yang lebih lengkap */}
       <div className={`sidebar ${isUnlocked ? "unlocked" : "centered"}`}>
@@ -250,6 +386,12 @@ export default function Home() {
           </div>
         </div>
         
+        {/* Dynamic Island floating di atas status bar */}
+        <div className="dynamic-island">
+          <div className="dynamic-dot"></div>
+          <div className="dynamic-dot"></div>
+        </div>
+
         <div className="phone-content">
           {/* Profile Section - Diperbarui dengan desain minimalis dan modern */}
           <div className="profile-section">
@@ -311,75 +453,73 @@ export default function Home() {
 
           <div className="section-divider"></div>
 
-            {/* Menu Applications - Semua aplikasi disatukan */}
-            <div className="menu-apps">
-              <div className="menu-title" style={{ color: '#1E40AF' }}>APPLICATIONS</div>
-              <div className="apps-grid">
-                {/* Aplikasi utama */}
-                <div
-                  className="app-item"
-                  onClick={() => scrollToSection("projects")}
-                >
-                  <div className="app-icon projects-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #c9b18aff, #e69123ff)' }}>
-                    <FaProjectDiagram className="text-white text-2xl" />
-                  </div>
-                  <div className="app-name">Projects</div>
+          {/* Menu Applications - Semua aplikasi disatukan */}
+          <div className="menu-apps">
+            <div className="menu-title" style={{ color: '#1E40AF' }}>APPLICATIONS</div>
+            <div className="apps-grid">
+              {/* Aplikasi utama */}
+              <div
+                className="app-item"
+                onClick={() => scrollToSection("projects")}
+              >
+                <div className="app-icon projects-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #c9b18aff, #e69123ff)' }}>
+                  <FaProjectDiagram className="text-white text-2xl" />
                 </div>
-                <div
-                  className="app-item"
-                  onClick={() => scrollToSection("experience")}
-                >
-                  <div className="app-icon experience-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #1392a3ff, #1E40AF)' }}>
-                    <FaBriefcase className="text-white text-2xl" />
-                  </div>
-                  <div className="app-name">Experience</div>
-                </div>
-                <div
-                  className="app-item"
-                  onClick={() => scrollToSection("skills")}
-                >
-                  <div className="app-icon skills-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #14a16dff, #1E40AF)' }}>
-                    <FaBolt className="text-white text-2xl" />
-                  </div>
-                  <div className="app-name">Skills</div>
-                </div>
-
-                {/* Sosial media */}
-                <a
-                  href="https://github.com/syifaarafifah"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="app-item"
-                >
-                  <div className="app-icon github-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #010916ff, #525357ff)' }}>
-                    <FaGithub className="text-white text-2xl" />
-                  </div>
-                  <div className="app-name">GitHub</div>
-                </a>
-                <a
-                  href="https://id.linkedin.com/in/syifa-rafifah-584061340"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="app-item"
-                >
-                  <div className="app-icon linkedin-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #062458ff, #061e70ff)' }}>
-                    <FaLinkedin className="text-white text-2xl" />
-                  </div>
-                  <div className="app-name">LinkedIn</div>
-                </a>
-                <a 
-                  href="mailto:syifarafifah527@gmail.com" 
-                  className="app-item"
-                >
-                  <div className="app-icon email-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #870303ff, #c48080ff)' }}>
-                    <SiGmail className="text-white text-2xl" />
-                  </div>
-                  <div className="app-name">Email</div>
-                </a>
+                <div className="app-name">Projects</div>
               </div>
-            </div>
+              <div
+                className="app-item"
+                onClick={() => scrollToSection("experience")}
+              >
+                <div className="app-icon experience-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #1392a3ff, #1E40AF)' }}>
+                  <FaBriefcase className="text-white text-2xl" />
+                </div>
+                <div className="app-name">Experience</div>
+              </div>
+              <div
+                className="app-item"
+                onClick={() => scrollToSection("skills")}
+              >
+                <div className="app-icon skills-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #14a16dff, #1E40AF)' }}>
+                  <FaBolt className="text-white text-2xl" />
+                </div>
+                <div className="app-name">Skills</div>
+              </div>
 
-          <div className="section-divider"></div>
+              {/* Sosial media */}
+              <a
+                href="https://github.com/syifaarafifah"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="app-item"
+              >
+                <div className="app-icon github-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #010916ff, #525357ff)' }}>
+                  <FaGithub className="text-white text-2xl" />
+                </div>
+                <div className="app-name">GitHub</div>
+              </a>
+              <a
+                href="https://id.linkedin.com/in/syifa-rafifah-584061340"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="app-item"
+              >
+                <div className="app-icon linkedin-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #062458ff, #061e70ff)' }}>
+                  <FaLinkedin className="text-white text-2xl" />
+                </div>
+                <div className="app-name">LinkedIn</div>
+              </a>
+              <a 
+                href="mailto:syifarafifah527@gmail.com" 
+                className="app-item"
+              >
+                <div className="app-icon email-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #870303ff, #c48080ff)' }}>
+                  <SiGmail className="text-white text-2xl" />
+                </div>
+                <div className="app-name">Email</div>
+              </a>
+            </div>
+          </div>
 
           <div className="section-divider"></div>
 
@@ -496,59 +636,9 @@ export default function Home() {
               </div>
             </div>
           </div> 
-            {/* Projects Section */}
-            <div id="projects" className="content-section">
-              <div className="section-divider"></div>
-              <h2 className="section-header flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
-                <FaProjectDiagram style={{ color: '#1E40AF' }} />
-                PROJECTS
-              </h2>
 
-              <div className="projects-list">
-                {projects.map((project, index) => (
-                  <div
-                    key={`proj-${project.id}-${index}`}
-                    className="project-item"
-                  >
-                    <div className="project-header">
-                      <div>
-                        <h3 className="project-title flex items-center gap-2" style={{ color: '#1E40AF' }}>
-                          <FaLaptopCode style={{ color: '#1E40AF' }} />
-                          {project.title}
-                        </h3>
-                        <p className="project-role">{project.role}</p>
-                      </div>
-                      <span className="project-period">{project.period}</span>
-                    </div>
-
-                    <div className="project-description">
-                      <p>{project.description}</p>
-                    </div>
-
-                    {/* Project Gallery */}
-                    <div className="project-gallery">
-                      {[...Array(3)].map((_, i) => (
-                        <div key={i} className="gallery-item">
-                          Project Image {i + 1}
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="tech-tags">
-                      {project.technologies.map((tech, techIndex) => (
-                        <span
-                          key={`tech-${index}-${techIndex}`}
-                          className="tech-tag"
-                          style={{ background: '#DBEAFE', color: '#1E40AF' }}
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Memanggil komponen Projects langsung */}
+            <Projects />
 
             {/* Experience Section */}
             <div id="experience" className="content-section">
@@ -565,76 +655,11 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Skills Section */}
-            <div id="skills" className="content-section">
-              <div className="section-divider"></div>
-              <h2 className="section-header flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
-                <FaBolt style={{ color: '#1E40AF' }} />
-                SKILLS
-              </h2>
+            {/* Memanggil komponen Skills langsung */}
+            <Skills />
 
-              <div className="skills-grid">
-                <div className="skill-category">
-                  <h3 className="flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
-                    <FaCode style={{ color: '#1E40AF' }} />
-                    TECHNICAL SKILLS
-                  </h3>
-                  <div className="skills-list">
-                    {skills.technical.map((skill, index) => (
-                      <span
-                        key={`tech-${index}`}
-                        className="skill-item flex items-center gap-2"
-                        style={{ background: '#DBEAFE', color: '#1E40AF' }}
-                      >
-                        {skill.icon}
-                        {skill.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="skill-category">
-                  <h3 className="flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
-                    <FaUsers style={{ color: '#1E40AF' }} />
-                    SOFT SKILLS
-                  </h3>
-                  <div className="skills-list">
-                    {skills.soft.map((skill, index) => (
-                      <span
-                        key={`soft-${index}`}
-                        className="skill-item flex items-center gap-2"
-                        style={{ background: '#DBEAFE', color: '#1E40AF' }}
-                      >
-                        {skill.icon}
-                        {skill.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Education Section */}
-            <div id="education" className="content-section">
-              <div className="section-divider"></div>
-              <h2 className="section-header flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
-                <FaGraduationCap style={{ color: '#1E40AF' }} />
-                EDUCATION
-              </h2>
-
-              <div className="experience-item">
-                <div className="experience-period">2023 — PRESENT</div>
-                <h3 className="experience-title flex items-center gap-2" style={{ color: '#1E40AF' }}>
-                  <IoMdSchool style={{ color: '#1E40AF' }} />
-                  Diploma IV - Software Engineering Technology
-                </h3>
-                <p className="experience-company">Politeknik Negeri Batam</p>
-                <p className="experience-description">
-                  Currently a fifth-semester student specializing in web and
-                  mobile development.
-                </p>
-              </div>
-            </div>
+            {/* Memanggil komponen Education langsung */}
+            <Education />
           </div>
         </div>
       )}
@@ -647,7 +672,7 @@ export default function Home() {
           margin-bottom: 1.5rem;
         }
 
-.menu-title {
+        .menu-title {
           font-size: 0.9rem;
           font-weight: 600;
           color: #6b7280;
@@ -683,43 +708,12 @@ export default function Home() {
           justify-content: center;
         }
 
-        .projects-icon {
-          background: linear-gradient(135deg, #8b5cf6, #ec4899);
-        }
-
-        .experience-icon {
-          background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-        }
-
-        .skills-icon {
-          background: linear-gradient(135deg, #f59e0b, #ef4444);
-        }
-
-        .github-icon {
-          background: linear-gradient(135deg, #333, #000);
-        }
-
-        .linkedin-icon {
-          background: linear-gradient(135deg, #0077b5, #0a66c2);
-        }
-
-        .email-icon {
-          background: linear-gradient(135deg, #ea4335, #d44638);
-        }
-
-        .home-icon {
-          background: linear-gradient(135deg, #10b981, #059669);
-        }
-
-        .education-icon {
-          background: linear-gradient(135deg, #6366f1, #4f46e5);
-        }
-
         .app-name {
           font-size: 0.75rem;
           color: #4b5563;
           text-align: center;
         }
+
 
         /* Animasi */
         @keyframes floatBalloon {
