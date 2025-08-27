@@ -1460,8 +1460,9 @@ body {
     margin: 4px auto;
     padding: 15px;
     border: 7px solid #1c1c1e;
-    height: px;
+    height: 560px;
     min-height: 200px;
+    max-height: 570px;
   }
 }
 
