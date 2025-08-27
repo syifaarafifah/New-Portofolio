@@ -369,13 +369,13 @@ export default function Home() {
         <div className="natural-bird natural-bird-4">🐦</div>
       </div>
 
-      {/* Lock Screen Overlay */}
-      {!isUnlocked && (
-        <LockScreen onUnlock={unlockPhone} isUnlocked={isUnlocked} />
-      )}
-
       {/* Sidebar dengan desain smartphone yang lebih lengkap */}
       <div className={`sidebar ${isUnlocked ? "unlocked" : "centered"}`}>
+        {/* Lock Screen Overlay - Dipindahkan ke dalam sidebar */}
+        {!isUnlocked && (
+          <LockScreen onUnlock={unlockPhone} isUnlocked={isUnlocked} />
+        )}
+        
         {/* Status Bar */}
         <div className="phone-status-bar">
           <div className="status-time">14:25</div>
