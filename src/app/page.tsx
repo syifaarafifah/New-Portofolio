@@ -471,7 +471,7 @@ export default function Home() {
                 className="app-item"
                 onClick={() => scrollToSection("experience")}
               >
-                <div className="app-icon experience-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #1392a3ff, #1E40AF)' }}>
+                <div className="app-icon experience-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #ebc0a1ff, #e6df20ff)' }}>
                   <FaBriefcase className="text-white text-2xl" />
                 </div>
                 <div className="app-name">Experience</div>

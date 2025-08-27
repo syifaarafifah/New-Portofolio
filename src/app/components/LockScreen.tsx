@@ -132,14 +132,13 @@ export default function LockScreen({ onUnlock, isUnlocked }: LockScreenProps) {
         <div className="dynamic-dot"></div>
       </div>
 
-      {/* Status Bar dengan jam dan baterai di samping Dynamic Island */}
-      <div className="status-bar">
-        <div className="status-time">{currentTime}</div>
-        <div className="status-icons">
-          <IoCellular className="status-icon" />
-          <FaWifi className="status-icon" />
-          <FaBatteryFull className="status-icon" />
-        </div>
+      {/* Full Screen Octopus Background */}
+      <div className="octopus-background">
+        <img 
+          src="https://cdn.dribbble.com/userupload/23395409/file/original-470638bc3554712d2761d256f2f3f414.gif" 
+          alt="Octopus animation background"
+        />
+        <div className="background-overlay"></div>
       </div>
 
       {/* Lock Screen Content */}
@@ -216,7 +215,6 @@ export default function LockScreen({ onUnlock, isUnlocked }: LockScreenProps) {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(15deg, #f0dcb6ff 0%, #ddb771ff 100%);
           color: white;
           display: flex;
           flex-direction: column;
@@ -225,68 +223,31 @@ export default function LockScreen({ onUnlock, isUnlocked }: LockScreenProps) {
           overflow: hidden;
         }
                 
-        .status-bar {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 10px 20px;
-          font-size: 14px;
-          font-weight: 600;
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 20;
-        }
         
-        .status-icons {
-          display: flex;
-          gap: 5px;
-        }
-        
-        .status-icon {
-          font-size: 14px;
-        }
-        
-        .tech-background {
+        .octopus-background {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          pointer-events: none;
           z-index: 1;
+          overflow: hidden;
         }
         
-        .tech-icon {
+        .octopus-background img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        
+        .background-overlay {
           position: absolute;
-          font-size: 24px;
-          opacity: 0.1;
-          color: white;
-        }
-        
-        .tech-icon-1 {
-          top: 20%;
-          left: 10%;
-          animation: float 8s ease-in-out infinite;
-        }
-        
-        .tech-icon-2 {
-          top: 60%;
-          right: 15%;
-          animation: float 10s ease-in-out infinite 1s;
-        }
-        
-        .tech-icon-3 {
-          bottom: 30%;
-          left: 20%;
-          animation: float 12s ease-in-out infinite 2s;
-        }
-        
-        .tech-icon-4 {
-          top: 40%;
-          right: 25%;
-          animation: float 9s ease-in-out infinite 3s;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+          z-index: 2;
         }
         
         .lock-content {
@@ -302,17 +263,18 @@ export default function LockScreen({ onUnlock, isUnlocked }: LockScreenProps) {
         
         .lock-time {
           font-size: 60px;
-          font-weight: 300;
+          font-weight: 700;
           margin-bottom: 10px;
-          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+          letter-spacing: 1px;
         }
         
         .lock-date {
           font-size: 18px;
-          font-weight: 400;
+          font-weight: 500;
           opacity: 0.9;
           margin-bottom: 40px;
-          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+          text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
         }
         
         .unlock-button-container {
@@ -324,25 +286,28 @@ export default function LockScreen({ onUnlock, isUnlocked }: LockScreenProps) {
           display: flex;
           flex-direction: column;
           align-items: center;
-          background: rgba(255, 255, 255, 0.15);
-          border: 1px solid rgba(255, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.4);
           border-radius: 50px;
           padding: 15px 30px;
           color: white;
           backdrop-filter: blur(10px);
           cursor: pointer;
           transition: all 0.3s ease;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
         
         .unlock-button:hover {
-          background: rgba(255, 255, 255, 0.25);
+          background: rgba(255, 255, 255, 0.3);
           transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
         
         .lock-icon {
           font-size: 20px;
           margin-bottom: 8px;
+          filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
         }
         
         .pin-pad-container {
@@ -373,6 +338,7 @@ export default function LockScreen({ onUnlock, isUnlocked }: LockScreenProps) {
           padding: 10px;
           opacity: 0.8;
           transition: opacity 0.2s ease;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
         
         .back-button:hover {
@@ -381,8 +347,9 @@ export default function LockScreen({ onUnlock, isUnlocked }: LockScreenProps) {
         
         .pin-pad-header h3 {
           margin: 0;
-          font-weight: 500;
+          font-weight: 600;
           font-size: 18px;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
         
         .placeholder {
@@ -399,13 +366,15 @@ export default function LockScreen({ onUnlock, isUnlocked }: LockScreenProps) {
           width: 18px;
           height: 18px;
           border-radius: 50%;
-          border: 2px solid rgba(255, 255, 255, 0.5);
+          border: 2px solid rgba(255, 255, 255, 0.7);
           transition: all 0.2s ease;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
         
         .pin-dot.filled {
           background-color: white;
           border-color: white;
+          box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
         
         .error-message {
@@ -414,6 +383,7 @@ export default function LockScreen({ onUnlock, isUnlocked }: LockScreenProps) {
           font-size: 14px;
           height: 20px;
           font-weight: 500;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
         
         .number-pad {
@@ -433,19 +403,21 @@ export default function LockScreen({ onUnlock, isUnlocked }: LockScreenProps) {
           border-radius: 35px;
           border: none;
           background: rgba(255, 255, 255, 0.15);
-          color: #c69937ff;
+          color: white;
           font-size: 24px;
           font-weight: 500;
           cursor: pointer;
           backdrop-filter: blur(10px);
           transition: all 0.2s ease;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
           margin: 3px;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
         
         .number-button:hover {
           background: rgba(255, 255, 255, 0.25);
           transform: scale(1.05);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
         
         .empty-button {
@@ -465,22 +437,25 @@ export default function LockScreen({ onUnlock, isUnlocked }: LockScreenProps) {
           cursor: pointer;
           backdrop-filter: blur(10px);
           transition: all 0.2s ease;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
         
         .delete-button:hover {
           background: rgba(255, 255, 255, 0.25);
           transform: scale(1.05);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
         
         .pin-hint {
           margin-top: 20px;
           font-size: 12px;
-          opacity: 0.6;
-          background: rgba(223, 179, 98, 0.84);
+          opacity: 0.8;
+          background: rgba(0, 0, 0, 0.4);
           padding: 6px 12px;
           border-radius: 12px;
           backdrop-filter: blur(10px);
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
         
         @keyframes float {
