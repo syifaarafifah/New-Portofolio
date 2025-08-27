@@ -1476,11 +1476,11 @@ body {
   }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 480px) {
   .sidebar {
-    width: 80%;
+    width: 85%;
     min-width: unset;
-    max-width: 300px;
+    max-width: 320px;
     border-radius: 15px;
     margin: 4px auto;
     padding: 15px;
