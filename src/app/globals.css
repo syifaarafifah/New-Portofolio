@@ -18,7 +18,7 @@
   --light-text: #666666;
   --sidebar-bg: #ffe8d6;
   --border-color: #ffd166;
-  --iphone-gray: #f2f2f7;
+  --iphone-gray: #f2f2f7; 
   --iphone-dark: #1c1c1e;
 }
 
@@ -1329,7 +1329,7 @@ body {
   .sidebar,
   .main-content {
     width: 80%;
-    margin: 10px auto;
+    margin: 20px;
   }
   
   .sidebar {
@@ -1342,7 +1342,7 @@ body {
   
   .main-content {
     order: 1;
-    width: 100%;
+    width: 80%;
   }
 }
 
@@ -1382,6 +1382,7 @@ body {
 
 .content-wrapper {
   padding: 1.5rem;
+  background-color: #ffffff;
 }
 
 .hero-heading {

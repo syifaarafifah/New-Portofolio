@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Header from "./components/Header";
 import Experience from "./components/Experience";
-import HeroLinks from "./components/HeroLinks";
 import BubbleBackground from "./components/BubbleBackground";
 import { experiences } from "./data/experience";
 import { projects } from "./data/projects";
 import LockScreen from "./components/LockScreen";
+import Skills from "./components/Skills";
+
 import {
   FaGithub,
   FaLinkedin,
@@ -50,52 +50,6 @@ interface BalloonProps {
   style: React.CSSProperties;
   children?: React.ReactNode;
 }
-
-// Define skills data dengan semua skills yang diminta
-const skills = {
-  technical: [
-    { name: "HTML", icon: <SiHtml5 className="text-blue-400" /> },
-    { name: "CSS", icon: <SiCss3 className="text-blue-500" /> },
-    { name: "JavaScript", icon: <SiJavascript className="text-blue-600" /> },
-    { name: "Laravel", icon: <SiLaravel className="text-blue-700" /> },
-    { name: "Next.js", icon: <SiNextdotjs className="text-blue-800" /> },
-    { name: "React Native", icon: <SiReact className="text-blue-900" /> },
-    { name: "PHP", icon: <SiPhp className="text-blue-400" /> },
-    { name: "MySQL", icon: <SiMysql className="text-blue-500" /> },
-    { name: "Figma", icon: <SiFigma className="text-blue-600" /> },
-    { name: "Git", icon: <SiGit className="text-blue-700" /> },
-    { name: "AppSheet", icon: <SiAppstore className="text-blue-800" /> },
-    { name: "TypeScript", icon: <SiTypescript className="text-blue-900" /> },
-    { name: "Tailwind CSS", icon: <SiTailwindcss className="text-blue-400" /> },
-  ],
-  soft: [
-    {
-      name: "Team Collaboration",
-      icon: <FaUsers className="text-blue-500" />,
-    },
-    {
-      name: "Problem Solving",
-      icon: <FaLightbulb className="text-blue-600" />,
-    },
-    {
-      name: "Project Management",
-      icon: <FaProjectDiagram className="text-blue-700" />,
-    },
-    {
-      name: "Adaptability",
-      icon: <IoMdCloudDownload className="text-blue-400" />,
-    },
-    {
-      name: "Attention to Detail",
-      icon: <FaTools className="text-blue-500" />,
-    },
-    { name: "Communication", icon: <FaEnvelope className="text-blue-600" /> },
-    {
-      name: "Time Management",
-      icon: <FaChartBar className="text-blue-700" />,
-    },
-  ],
-};
 
 // Komponen Projects yang dipindahkan ke sini
 const Projects = () => {
@@ -156,57 +110,6 @@ const Projects = () => {
 };
 
 // Komponen Skills yang dipindahkan ke sini
-const Skills = () => {
-  return (
-    <div id="skills" className="content-section">
-      <div className="section-divider"></div>
-      <h2 className="section-header flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
-        <FaBolt style={{ color: '#1E40AF' }} />
-        SKILLS
-      </h2>
-
-      <div className="skills-grid">
-        <div className="skill-category">
-          <h3 className="flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
-            <FaCode style={{ color: '#1E40AF' }} />
-            TECHNICAL SKILLS
-          </h3>
-          <div className="skills-list">
-            {skills.technical.map((skill, index) => (
-              <span
-                key={`tech-${index}`}
-                className="skill-item flex items-center gap-2"
-                style={{ background: '#DBEAFE', color: '#1E40AF' }}
-              >
-                {skill.icon}
-                {skill.name}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="skill-category">
-          <h3 className="flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
-            <FaUsers style={{ color: '#1E40AF' }} />
-            SOFT SKILLS
-          </h3>
-          <div className="skills-list">
-            {skills.soft.map((skill, index) => (
-              <span
-                key={`soft-${index}`}
-                className="skill-item flex items-center gap-2"
-                style={{ background: '#DBEAFE', color: '#1E40AF' }}
-              >
-                {skill.icon}
-                {skill.name}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 // Komponen Education yang dipindahkan ke sini
 const Education = () => {
