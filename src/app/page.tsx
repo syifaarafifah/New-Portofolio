@@ -7,42 +7,24 @@ import { experiences } from "./data/experience";
 import { projects } from "./data/projects";
 import LockScreen from "./components/LockScreen";
 import Skills from "./components/Skills";
-
+import Projects from "./components/Projects";
+import { FaMap } from "react-icons/fa6";
+import { GrProjects } from "react-icons/gr";
 import {
   FaGithub,
   FaLinkedin,
-  FaEnvelope,
   FaHome,
   FaBriefcase,
-  FaChartBar,
   FaBolt,
-  FaCode,
-  FaLaptopCode,
-  FaTools,
-  FaUsers,
-  FaLightbulb,
   FaProjectDiagram,
   FaGraduationCap,
-  FaLock,
-  FaLockOpen,
 } from "react-icons/fa";
 import {
   SiGmail,
-  SiJavascript,
   SiReact,
-  SiNextdotjs,
-  SiLaravel,
-  SiMysql,
   SiFigma,
-  SiGit,
-  SiTypescript,
-  SiTailwindcss,
-  SiHtml5,
-  SiCss3,
-  SiPhp,
-  SiAppstore,
 } from "react-icons/si";
-import { IoMdSchool, IoMdCloudDownload } from "react-icons/io";
+import { IoMdSchool } from "react-icons/io";
 
 // Define interface untuk Balloon
 interface BalloonProps {
@@ -51,70 +33,10 @@ interface BalloonProps {
   children?: React.ReactNode;
 }
 
-// Komponen Projects yang dipindahkan ke sini
-const Projects = () => {
-  return (
-    <div id="projects" className="content-section">
-      <div className="section-divider"></div>
-      <h2 className="section-header flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
-        <FaProjectDiagram style={{ color: '#1E40AF' }} />
-        PROJECTS
-      </h2>
-
-      <div className="projects-list">
-        {projects.map((project, index) => (
-          <div
-            key={`proj-${project.id}-${index}`}
-            className="project-item"
-          >
-            <div className="project-header">
-              <div>
-                <h3 className="project-title flex items-center gap-2" style={{ color: '#1E40AF' }}>
-                  <FaLaptopCode style={{ color: '#1E40AF' }} />
-                  {project.title}
-                </h3>
-                <p className="project-role">{project.role}</p>
-              </div>
-              <span className="project-period">{project.period}</span>
-            </div>
-
-            <div className="project-description">
-              <p>{project.description}</p>
-            </div>
-
-            {/* Project Gallery */}
-            <div className="project-gallery">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="gallery-item">
-                  Project Image {i + 1}
-                </div>
-              ))}
-            </div>
-
-            <div className="tech-tags">
-              {project.technologies.map((tech, techIndex) => (
-                <span
-                  key={`tech-${index}-${techIndex}`}
-                  className="tech-tag"
-                  style={{ background: '#DBEAFE', color: '#1E40AF' }}
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// Komponen Skills yang dipindahkan ke sini
-
-// Komponen Education yang dipindahkan ke sini
+// Komponen Education
 const Education = () => {
   return (
-    <div id="education" className="content-section">
+    <div className="content-section">
       <div className="section-divider"></div>
       <h2 className="section-header flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
         <FaGraduationCap style={{ color: '#082891ff' }} />
@@ -138,69 +60,13 @@ const Education = () => {
 };
 
 export default function Home() {
-  const [balloons, setBalloons] = useState<React.ReactElement<BalloonProps>[]>(
-    []
-  );
   const [grassBlades, setGrassBlades] = useState<React.ReactElement[]>([]);
   const [activeSection, setActiveSection] = useState("home");
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [showContent, setShowContent] = useState(false);
+  const [animateContent, setAnimateContent] = useState(false);
 
   useEffect(() => {
-    // Create floating balloons animation
-    const createBalloons = () => {
-      const newBalloons: React.ReactElement<BalloonProps>[] = [];
-      const colors = [
-        "#3B82F6", // Blue 500
-        "#2563EB", // Blue 600
-        "#1D4ED8", // Blue 700
-        "#1E40AF", // Blue 800
-        "#1E3A8A", // Blue 900
-        "#60A5FA", // Blue 400
-      ];
-
-      for (let i = 0; i < 15; i++) {
-        const size = Math.random() * 30 + 20;
-        const left = Math.random() * 100;
-        const animationDuration = Math.random() * 15 + 10;
-        const animationDelay = Math.random() * 5;
-        const color = colors[Math.floor(Math.random() * colors.length)];
-
-        newBalloons.push(
-          <div
-            key={i}
-            className="balloon"
-            style={{
-              position: "absolute",
-              width: `${size}px`,
-              height: `${size * 1.2}px`,
-              left: `${left}%`,
-              bottom: "-50px",
-              borderRadius: "50%",
-              background: color,
-              animation: `floatBalloon ${animationDuration}s ease-in-out ${animationDelay}s infinite`,
-              boxShadow: "inset -5px -5px 10px rgba(0, 0, 0, 0.1)",
-              zIndex: 1,
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                bottom: "-5px",
-                left: "50%",
-                transform: "translateX(-50%)",
-                width: "2px",
-                height: "30px",
-                background: "linear-gradient(to bottom, #ccc, #fff)",
-              }}
-            />
-          </div>
-        );
-      }
-
-      setBalloons(newBalloons);
-    };
-
     // Create grass blades
     const createGrass = () => {
       const blades = [];
@@ -224,7 +90,6 @@ export default function Home() {
       setGrassBlades(blades);
     };
 
-    createBalloons();
     createGrass();
   }, []);
 
@@ -232,45 +97,135 @@ export default function Home() {
     setIsUnlocked(true);
     setTimeout(() => {
       setShowContent(true);
+      setAnimateContent(true);
     }, 800);
   };
 
-  const scrollToSection = (sectionId: string) => {
-    setActiveSection(sectionId);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  const navigateToSection = (sectionId: string) => {
+    setAnimateContent(false);
+    setTimeout(() => {
+      setActiveSection(sectionId);
+      setTimeout(() => setAnimateContent(true), 50);
+    }, 300);
+  };
+
+  // Fungsi untuk merender konten berdasarkan section aktif
+  const renderContent = () => {
+    switch(activeSection) {
+      case "home":
+        return (
+          <div className="content-wrapper">
+            <div className="hero-section">
+              <h1 className="hero-heading" style={{ color: '#1E40AF' }}>
+                {"I'm a Software Engineering Student & Front-End Developer"}
+              </h1>
+            </div>
+            
+            {/* About content now appears in home section */}
+            <div className="content-section">
+              <div className="section-divider"></div>
+              <h2 className="section-header" style={{ color: '#1E40AF', fontFamily: 'Calibri, "Gill Sans", "Gill Sans MT", sans-serif' }}>ABOUT</h2>
+
+              <div className="about-container">
+                <div className="profile-image-container">
+                  <div className="profile-frame">
+                    <img 
+                      src="/images/profile/Profile.jpeg" 
+                      alt="Syifa Rafifah"
+                      className="profile-photo"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const fallback = document.getElementById('profile-fallback');
+                        if (fallback) fallback.style.display = 'flex';
+                      }}
+                    />
+                    <div id="profile-fallback" className="profile-fallback" style={{display: 'none'}}>
+                      SR
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="about-text"
+                  style={{ fontFamily: 'Calibri, "Gill Sans", "Gill Sans MT", sans-serif' }}
+                >
+                  <p>
+                    The intersection of technology and creativity has always inspired me. Since
+                    my early days exploring Microsoft Office and simple design tools, I've been
+                    fascinated by how digital products can shape the way people interact with
+                    information.
+                  </p>
+
+                  <p>
+                    Fast forward to today, as a Software Engineering Technology student at Batam
+                    State Polytechnic, I've immersed myself in web and mobile development,
+                    exploring technologies such as HTML, CSS, JavaScript, Laravel, Next.js,
+                    React Native, MySQL, and AppSheet. Alongside these, tools like Figma and
+                    Canva have allowed me to bring ideas to life visually and strengthen my
+                    passion for crafting user-centered designs.
+                  </p>
+
+                  <p>
+                    What excites me most about frontend development and UI/UX design is the
+                    opportunity to blend functionality with experience — to create applications
+                    that are not only efficient but also engaging and intuitive. For me, it goes
+                    beyond writing code or arranging layouts; it's about designing digital
+                    experiences that solve problems, improve usability, and make technology more
+                    approachable for everyone.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      case "projects":
+        return <Projects projects={projects} />;
+      case "experience":
+        return (
+          <div className="content-wrapper">
+            <div className="content-section">
+              <div className="section-divider"></div>
+              <h2 className="section-header flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
+                <FaBriefcase style={{ color: '#1E40AF' }} />
+                EXPERIENCE
+              </h2>
+
+              <div className="experiences-list">
+                {experiences.map((exp, index) => (
+                  <Experience key={`exp-${exp.id}-${index}`} experience={exp} />
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      case "skills":
+        return <Skills />;
+      case "education":
+        return (
+          <div className="content-wrapper">
+            <Education />
+          </div>
+        );
+      default:
+        return <div className="content-wrapper">Content not found</div>;
+    }
+  };
+
+  // Tema untuk setiap section
+  const getThemeClass = () => {
+    switch(activeSection) {
+      case "home": return "theme-home";
+      case "projects": return "theme-projects";
+      case "experience": return "theme-experience";
+      case "skills": return "theme-skills";
+      case "education": return "theme-education";
+      default: return "theme-default";
     }
   };
 
   return (
     <div className="split-container">
       <BubbleBackground />
-
-      {/* Floating Balloons */}
-      <div
-        className="balloon-container"
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
-          zIndex: 2,
-          overflow: "hidden",
-        }}
-      >
-        {balloons}
-      </div>
-
-      {/* Natural Bird Animation - Flying Around Clouds */}
-      <div className="birds-natural-container">
-        <div className="natural-bird natural-bird-1">🐦</div>
-        <div className="natural-bird natural-bird-2">🐦</div>
-        <div className="natural-bird natural-bird-3">🐦</div>
-        <div className="natural-bird natural-bird-4">🐦</div>
-      </div>
 
       {/* Sidebar dengan desain smartphone yang lebih lengkap */}
       <div className={`sidebar ${isUnlocked ? "unlocked" : "centered"}`}>
@@ -362,28 +317,28 @@ export default function Home() {
             <div className="apps-grid">
               {/* Aplikasi utama */}
               <div
-                className="app-item"
-                onClick={() => scrollToSection("projects")}
+                className={`app-item ${activeSection === "projects" ? "active" : ""}`}
+                onClick={() => navigateToSection("projects")}
               >
-                <div className="app-icon projects-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #c9b18aff, #e69123ff)' }}>
-                  <FaProjectDiagram className="text-white text-2xl" />
+                <div className="app-icon projects-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #ffcc7aff, #f4a33aff)' }}>
+                  <GrProjects className="text-white text-2xl" />
                 </div>
                 <div className="app-name">Projects</div>
               </div>
               <div
-                className="app-item"
-                onClick={() => scrollToSection("experience")}
+                className={`app-item ${activeSection === "experience" ? "active" : ""}`}
+                onClick={() => navigateToSection("experience")}
               >
-                <div className="app-icon experience-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #ebc0a1ff, #e6df20ff)' }}>
+                <div className="app-icon experience-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #b6ea56ff, #4bc52cff)' }}>
                   <FaBriefcase className="text-white text-2xl" />
                 </div>
                 <div className="app-name">Experience</div>
               </div>
               <div
-                className="app-item"
-                onClick={() => scrollToSection("skills")}
+                className={`app-item ${activeSection === "skills" ? "active" : ""}`}
+                onClick={() => navigateToSection("skills")}
               >
-                <div className="app-icon skills-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #14a16dff, #1E40AF)' }}>
+                <div className="app-icon skills-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #32aaeaff, #2581d7ff)' }}>
                   <FaBolt className="text-white text-2xl" />
                 </div>
                 <div className="app-name">Skills</div>
@@ -421,6 +376,18 @@ export default function Home() {
                 </div>
                 <div className="app-name">Email</div>
               </a>
+              {/* Menu Resume Baru */}
+              <a
+                href="/CV - Syifa Rafifah (6).pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="app-item"
+              >
+                <div className="app-icon resume-icon flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #ca901dff, #be9057ff)' }}>
+                  <FaMap className="text-white text-2xl" />
+                </div>
+                <div className="app-name">Resume</div>
+              </a>
             </div>
           </div>
 
@@ -438,11 +405,11 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Navigation Bar - Dihapus Projects, Experience, dan Skills */}
+        {/* Navigation Bar */}
         <div className="phone-nav">
           <div
             className={`nav-item ${activeSection === "home" ? "active" : ""}`}
-            onClick={() => scrollToSection("home")}
+            onClick={() => navigateToSection("home")}
           >
             <div className="nav-icon">
               <FaHome />
@@ -450,10 +417,8 @@ export default function Home() {
             <span>Home</span>
           </div>
           <div
-            className={`nav-item ${
-              activeSection === "education" ? "active" : ""
-            }`}
-            onClick={() => scrollToSection("education")}
+            className={`nav-item ${activeSection === "education" ? "active" : ""}`}
+            onClick={() => navigateToSection("education")}
           >
             <div className="nav-icon">
               <FaGraduationCap />
@@ -464,111 +429,30 @@ export default function Home() {
 
         {/* Grass Animation */}
         <div className="grass-container">{grassBlades}</div>
-
-        {/* Animasi anak ayam berjalan */}
-        <div className="chicken-animation">
-          <div className="chicken">🐥</div>
-          <div className="chicken chicken-2">🐥</div>
-        </div>
       </div>
 
       {/* Main Content Area */}
       {showContent && (
-        <div className="main-content">
-
-          {/* Matahari yang lebih besar */}
-          <div className="sun-large">☀️</div>
-
-          <div className="content-wrapper">
-            {/* Hero Section dengan animasi */}
-            <div id="home" className="hero-section">
-              <div className="floating-clouds">
-                <div className="cloud cloud-1">☁️</div>
-                <div className="cloud cloud-2">☁️</div>
-                <div className="cloud cloud-3">☁️</div>
-                <div className="cloud cloud-4">☁️</div>
-              </div>
-              <h1 className="hero-heading" style={{ color: '#1E40AF' }}>
-                {"I'm a Software Engineering Student & Front-End Developer"}
-              </h1>
-            </div>
-
-          {/* About Section dengan foto yang diperbesar */}
-          <div id="about" className="content-section">
-            <div className="section-divider"></div>
-            <h2 className="section-header" style={{ color: '#1E40AF', fontFamily: 'Calibri, "Gill Sans", "Gill Sans MT", sans-serif' }}>ABOUT</h2>
-
-            <div className="about-container">
-              <div className="profile-image-container">
-                <div className="profile-frame">
-                  <img 
-                    src="/images/profile/Profile.jpeg" 
-                    alt="Syifa Rafifah"
-                    className="profile-photo"
-                    onError={(e) => {
-                      // Fallback jika gambar tidak ditemukan
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      // Tampilkan fallback
-                      const fallback = document.getElementById('profile-fallback');
-                      if (fallback) fallback.style.display = 'flex';
-                    }}
-                  />
-                  {/* Fallback jika gambar tidak ada */}
-                  <div id="profile-fallback" className="profile-fallback" style={{display: 'none'}}>
-                    SR
-                  </div>
-                </div>
-              </div>
-
-              <div className="about-text" style={{ fontFamily: 'Calibri, "Gill Sans", "Gill Sans MT", sans-serif' }}>
-                <p>
-                  I am a fifth-semester Software Engineering Technology
-                  student at Batam State Polytechnic with a background in web
-                  and mobile development, database management, and creative
-                  UI/UX design. I enjoy building applications using
-                  technologies such as HTML, CSS, JavaScript, Laravel,
-                  Next.js, React Native, AppSheet, and MySQL, while also
-                  exploring design tools like Figma and Canva. Beyond
-                  technical skills, I am experienced in data and document
-                  management, proficient with Microsoft Office, and adaptable
-                  in collaborative environments. I am passionate about
-                  technology, problem-solving, and developing creative UI/UX
-                  that brings better user experiences.
-                </p>
-              </div>
-            </div>
-          </div> 
-
-            {/* Memanggil komponen Projects langsung */}
-            <Projects />
-
-            {/* Experience Section */}
-            <div id="experience" className="content-section">
-              <div className="section-divider"></div>
-              <h2 className="section-header flex items-center justify-center gap-2" style={{ color: '#1E40AF' }}>
-                <FaBriefcase style={{ color: '#1E40AF' }} />
-                EXPERIENCE
-              </h2>
-
-              <div className="experiences-list">
-                {experiences.map((exp, index) => (
-                  <Experience key={`exp-${exp.id}-${index}`} experience={exp} />
-                ))}
-              </div>
-            </div>
-
-            {/* Memanggil komponen Skills langsung */}
-            <Skills />
-
-            {/* Memanggil komponen Education langsung */}
-            <Education />
-          </div>
+        <div className={`main-content ${getThemeClass()} ${animateContent ? "animate-in" : "animate-out"}`}>
+          {renderContent()}
         </div>
       )}
 
       <style jsx>{`
         /* Styles untuk aplikasi */
+        .split-container {
+          display: flex;
+          height: 100vh;
+          overflow: hidden;
+        }
+                
+        .main-content {
+          flex: 1;
+          overflow-y: auto;
+          padding: 20px;
+          position: relative;
+        }
+        
         .menu-apps,
         .social-apps,
         .bottom-apps {
@@ -601,6 +485,10 @@ export default function Home() {
           transform: translateY(-3px);
         }
 
+        .app-item.active .app-icon {
+          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+
         .app-icon {
           width: 50px;
           height: 50px;
@@ -609,6 +497,7 @@ export default function Home() {
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: all 0.3s ease;
         }
 
         .app-name {
@@ -617,116 +506,132 @@ export default function Home() {
           text-align: center;
         }
 
+        /* Animasi untuk konten utama */
+        .main-content {
+          transition: transform 0.3s ease, opacity 0.3s ease;
+          opacity: 1;
+          transform: translateX(0);
+          position: relative;
+          overflow-y: auto;
+        }
 
-        /* Animasi */
-        @keyframes floatBalloon {
+        .main-content.animate-in {
+          animation: slideInFromRight 0.5s ease forwards;
+        }
+
+        .main-content.animate-out {
+          animation: slideOutToLeft 0.3s ease forwards;
+        }
+
+        @keyframes slideInFromRight {
           0% {
-            transform: translateY(0) rotate(0deg);
-          }
-          50% {
-            transform: translateY(-100vh) rotate(10deg);
-          }
-          100% {
-            transform: translateY(-200vh) rotate(0deg);
             opacity: 0;
-          }
-        }
-
-        @keyframes rotate {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        /* Animasi burung mengitari awan */
-        @keyframes flyAroundCloud1 {
-          0% {
-            transform: translate(0, 0) rotate(0deg) scaleX(1);
-          }
-          20% {
-            transform: translate(-100px, -80px) rotate(5deg) scaleX(1);
-          }
-          40% {
-            transform: translate(-200px, 0px) rotate(0deg) scaleX(1);
-          }
-          60% {
-            transform: translate(-150px, 120px) rotate(-5deg) scaleX(-1);
-          }
-          80% {
-            transform: translate(50px, 80px) rotate(0deg) scaleX(-1);
+            transform: translateX(50px);
           }
           100% {
-            transform: translate(0, 0) rotate(0deg) scaleX(1);
+            opacity: 1;
+            transform: translateX(0);
           }
         }
 
-        @keyframes flyZigZag {
+        @keyframes slideOutToLeft {
           0% {
-            transform: translate(0, 0) rotate(0deg);
-          }
-          25% {
-            transform: translate(-120px, -100px) rotate(10deg);
-          }
-          50% {
-            transform: translate(-80px, 120px) rotate(-5deg) scaleX(-1);
-          }
-          75% {
-            transform: translate(100px, -80px) rotate(8deg) scaleX(-1);
+            opacity: 1;
+            transform: translateX(0);
           }
           100% {
-            transform: translate(0, 0) rotate(0deg) scaleX(1);
+            opacity: 0;
+            transform: translateX(-50px);
           }
         }
 
-        @keyframes flyCircle {
-          0% {
-            transform: translate(0, 0) rotate(0deg);
-          }
-          25% {
-            transform: translate(100px, -100px) rotate(90deg);
-          }
-          50% {
-            transform: translate(0, -200px) rotate(180deg) scaleX(-1);
-          }
-          75% {
-            transform: translate(-100px, -100px) rotate(270deg) scaleX(-1);
-          }
-          100% {
-            transform: translate(0, 0) rotate(360deg) scaleX(1);
-          }
+        /* Tema untuk setiap section */
+        .theme-home {
+          background: #f8fafc;
         }
 
-        @keyframes flyFigure8 {
-          0% {
-            transform: translate(0, 0) rotate(0deg);
-          }
-          25% {
-            transform: translate(150px, -80px) rotate(45deg);
-          }
-          50% {
-            transform: translate(0, 0) rotate(0deg) scaleX(-1);
-          }
-          75% {
-            transform: translate(-150px, 80px) rotate(-45deg) scaleX(-1);
-          }
-          100% {
-            transform: translate(0, 0) rotate(0deg) scaleX(1);
-          }
+        .theme-projects {
+          background: #fffbeb;
         }
 
-        @keyframes flapWings {
-          0% {
-            transform: translateY(0) rotate(0deg);
-          }
-          50% {
-            transform: translateY(-4px) rotate(3deg);
-          }
-          100% {
-            transform: translateY(0) rotate(0deg);
-          }
+        .theme-experience {
+          background: #f0fdf4;
+        }
+
+        .theme-skills {
+          background: #fdf4ff;
+        }
+
+        .theme-education {
+          background: #eff6ff;
+        }
+        
+        .content-wrapper {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+        
+        .about-container {
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+          margin-top: 20px;
+        }
+        
+        .profile-image-container {
+          display: flex;
+          justify-content: center;
+        }
+        
+        .profile-frame {
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          overflow: hidden;
+          border: 4px solid #e5e7eb;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-photo {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        
+        .about-text p {
+          margin-bottom: 20px;
+          line-height: 1.6;
+          color: #374151;
+        }
+        
+        .hero-heading {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 30px;
+          text-align: center;
+          line-height: 1.2;
+        }
+        
+        .section-header {
+          font-size: 1.8rem;
+          font-weight: 600;
+          margin-bottom: 30px;
+          text-align: center;
+        }
+        
+        /* Menghapus animasi yang tidak perlu */
+        .balloon-container,
+        .birds-natural-container,
+        .chicken-animation,
+        .floating-clouds,
+        .sun-large,
+        .floating-hearts,
+        .floating-tools,
+        .floating-briefcases,
+        .floating-stars,
+        .floating-books {
+          display: none;
         }
       `}</style>
     </div>

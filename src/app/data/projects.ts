@@ -5,6 +5,9 @@ export interface ProjectItem {
   role: string;
   description: string[];
   technologies: string[];
+  techType: 'laravel' | 'nextjs' | 'react-native' | 'figma' | 'appsheet';
+  githubUrl?: string;
+  liveUrl?: string;
 }
 
 export const projects: ProjectItem[] = [
@@ -17,7 +20,8 @@ export const projects: ProjectItem[] = [
       "Led two semester-based projects on document verification and team scheduling using Laravel, JavaScript, and MySQL.",
       "Managed development flow, system integration, and internal testing."
     ],
-    technologies: ["Laravel", "JavaScript", "MySQL", "Project Management"]
+    technologies: ["Laravel", "JavaScript", "MySQL", "Project Management"],
+    techType: "laravel" // Changed to specific value
   },
   {
     id: 2,
@@ -29,7 +33,8 @@ export const projects: ProjectItem[] = [
       "Focused on responsive design, usability, and real-time data presentation.",
       "Collaborated with backend and hardware teams for seamless integration."
     ],
-    technologies: ["Laravel Blade", "Next.js", "Responsive Design", "IoT"]
+    technologies: ["Laravel Blade", "Next.js", "Responsive Design", "IoT"],
+    techType: "nextjs" // Changed to specific value
   },
   {
     id: 3,
@@ -40,7 +45,8 @@ export const projects: ProjectItem[] = [
       "Built Kaomoji Emoji App (React Native) for browsing and copying Japanese-style emojis with a clean UI and copy-to-clipboard feature.",
       "Developed ResiFinlyn (React Native) to automate receipt printing by integrating Jubelio API for SKU scanning, order retrieval, PDF generation, and instant printing."
     ],
-    technologies: ["React Native", "JavaScript", "API Integration", "PDF Generation"]
+    technologies: ["React Native", "JavaScript", "API Integration", "PDF Generation"],
+    techType: "react-native" // Changed to specific value
   },
   {
     id: 4,
@@ -51,7 +57,8 @@ export const projects: ProjectItem[] = [
       "Developed a Laravel-based QR code generator with dynamic routing and intuitive UI for internal company use.",
       "Handled fullstack development to support secure and efficient document processing."
     ],
-    technologies: ["Laravel", "QR Code", "Fullstack", "UI/UX"]
+    technologies: ["Laravel", "QR Code", "Fullstack", "UI/UX"],
+    techType: "laravel" // Changed to specific value
   },
   {
     id: 5,
@@ -61,7 +68,8 @@ export const projects: ProjectItem[] = [
     description: [
       "Designed mobile UI using Figma, including user flows, wireframes, prototypes, and developer-ready assets."
     ],
-    technologies: ["Figma", "UI/UX Design", "Wireframing", "Prototyping"]
+    technologies: ["Figma", "UI/UX Design", "Wireframing", "Prototyping"],
+    techType: "figma" // Changed to specific value
   },
   {
     id: 6,
@@ -71,6 +79,7 @@ export const projects: ProjectItem[] = [
     description: [
       "Built multiple no-code apps with AppSheet to streamline data entry, tracking, and operations across departments."
     ],
-    technologies: ["AppSheet", "No-Code", "Automation", "Data Management"]
+    technologies: ["AppSheet", "No-Code", "Automation", "Data Management"],
+    techType: "appsheet" // Changed to specific value
   }
 ];
