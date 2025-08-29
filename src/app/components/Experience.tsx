@@ -5,7 +5,7 @@ import { ExperienceItem } from '../data/experience';
 
 interface ExperienceProps {
   experience: ExperienceItem;
-  index: number;
+  index?: number; 
 }
 
 const Experience: React.FC<ExperienceProps> = ({ experience }) => {
