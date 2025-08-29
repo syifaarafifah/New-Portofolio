@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { FaBatteryFull, FaWifi, FaLock, FaUnlock, FaCaretLeft } from "react-icons/fa";
-import { IoCellular } from "react-icons/io5";
+import { useState, useEffect} from "react";
+import { FaLock,FaCaretLeft } from "react-icons/fa";
 
 interface LockScreenProps {
   onUnlock: () => void;

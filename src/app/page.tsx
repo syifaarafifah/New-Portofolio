@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Experience from "./components/Experience";
 import BubbleBackground from "./components/BubbleBackground";
 import { experiences } from "./data/experience";
@@ -25,13 +25,6 @@ import {
   SiFigma,
 } from "react-icons/si";
 import { IoMdSchool } from "react-icons/io";
-
-// Define interface untuk Balloon
-interface BalloonProps {
-  key: number;
-  style: React.CSSProperties;
-  children?: React.ReactNode;
-}
 
 // Komponen Education
 const Education = () => {
@@ -65,6 +58,7 @@ export default function Home() {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [animateContent, setAnimateContent] = useState(false);
+  const mainContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Create grass blades
@@ -105,7 +99,13 @@ export default function Home() {
     setAnimateContent(false);
     setTimeout(() => {
       setActiveSection(sectionId);
-      setTimeout(() => setAnimateContent(true), 50);
+      setTimeout(() => {
+        setAnimateContent(true);
+        // Scroll to top when changing section
+        if (mainContentRef.current) {
+          mainContentRef.current.scrollTop = 0;
+        }
+      }, 50);
     }, 300);
   };
 
@@ -124,7 +124,7 @@ export default function Home() {
             {/* About content now appears in home section */}
             <div className="content-section">
               <div className="section-divider"></div>
-              <h2 className="section-header" style={{ color: '#1E40AF', fontFamily: 'Calibri, "Gill Sans", "Gill Sans MT", sans-serif' }}>ABOUT</h2>
+              <h2 className="section-header" style={{ color: '#1E40AF' }}>ABOUT</h2>
 
               <div className="about-container">
                 <div className="profile-image-container">
@@ -145,34 +145,31 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="about-text"
-                  style={{ fontFamily: 'Calibri, "Gill Sans", "Gill Sans MT", sans-serif' }}
-                >
-                  <p>
-                    The intersection of technology and creativity has always inspired me. Since
-                    my early days exploring Microsoft Office and simple design tools, I've been
-                    fascinated by how digital products can shape the way people interact with
-                    information.
-                  </p>
+                <div className="about-text">
+                <p>
+                  The intersection of technology and creativity has always inspired me. Since
+                  my early days exploring Microsoft Office and simple design tools, {"I've"} been
+                  fascinated by how digital products can shape the way people interact with
+                  information.
+                </p>
 
-                  <p>
-                    Fast forward to today, as a Software Engineering Technology student at Batam
-                    State Polytechnic, I've immersed myself in web and mobile development,
-                    exploring technologies such as HTML, CSS, JavaScript, Laravel, Next.js,
-                    React Native, MySQL, and AppSheet. Alongside these, tools like Figma and
-                    Canva have allowed me to bring ideas to life visually and strengthen my
-                    passion for crafting user-centered designs.
-                  </p>
+                <p>
+                  Fast forward to today, as a Software Engineering Technology student at Batam
+                  State Polytechnic, {"I've"} immersed myself in web and mobile development,
+                  exploring technologies such as HTML, CSS, JavaScript, Laravel, Next.js,
+                  React Native, MySQL, and AppSheet. Alongside these, tools like Figma and
+                  Canva have allowed me to bring ideas to life visually and strengthen my
+                  passion for crafting user-centered designs.
+                </p>
 
-                  <p>
-                    What excites me most about frontend development and UI/UX design is the
-                    opportunity to blend functionality with experience — to create applications
-                    that are not only efficient but also engaging and intuitive. For me, it goes
-                    beyond writing code or arranging layouts; it's about designing digital
-                    experiences that solve problems, improve usability, and make technology more
-                    approachable for everyone.
-                  </p>
+                <p>
+                  What excites me most about frontend development and UI/UX design is the
+                  opportunity to blend functionality with experience — to create applications
+                  that are not only efficient but also engaging and intuitive. For me, it goes
+                  beyond writing code or arranging layouts; {"it's"} about designing digital
+                  experiences that solve problems, improve usability, and make technology more
+                  approachable for everyone.
+                </p>
                 </div>
               </div>
             </div>
@@ -190,11 +187,11 @@ export default function Home() {
                 EXPERIENCE
               </h2>
 
-              <div className="experiences-list">
-                {experiences.map((exp, index) => (
-                  <Experience key={`exp-${exp.id}-${index}`} experience={exp} />
-                ))}
-              </div>
+            <div className="experiences-list">
+              {experiences.map((exp, index) => (
+                <Experience key={`exp-${exp.id}-${index}`} experience={exp} />
+              ))}
+            </div>            
             </div>
           </div>
         );
@@ -433,24 +430,32 @@ export default function Home() {
 
       {/* Main Content Area */}
       {showContent && (
-        <div className={`main-content ${getThemeClass()} ${animateContent ? "animate-in" : "animate-out"}`}>
+        <div 
+          ref={mainContentRef}
+          className={`main-content ${getThemeClass()} ${animateContent ? "animate-in" : "animate-out"}`}
+        >
           {renderContent()}
         </div>
       )}
 
       <style jsx>{`
+        /* Import font */
+        @import url('https://fonts.googleapis.com/css2?family=Poetsen+One&family=Outfit:wght@300;400;500;600;700&display=swap');
+        
         /* Styles untuk aplikasi */
         .split-container {
           display: flex;
           height: 100vh;
           overflow: hidden;
+          font-family: 'Outfit', sans-serif;
         }
-                
+        
         .main-content {
           flex: 1;
           overflow-y: auto;
           padding: 20px;
           position: relative;
+          transition: all 0.5s ease;
         }
         
         .menu-apps,
@@ -547,29 +552,141 @@ export default function Home() {
 
         /* Tema untuk setiap section */
         .theme-home {
-          background: #f8fafc;
+          background: linear-gradient(135deg, #c3d9ef 0%, #bed8f2ff 100%);
+          color: #1e293b;
+          position: relative;
+          overflow: 
+        }
+        
+        .theme-home::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url("https://i.pinimg.com/1200x/b8/f9/65/b8f965c0c59031b6936119730cf9c04f.jpg");
+          background-size: cover;
+          background-position: center;
+          animation: waveAnimation 20s linear infinite;
+        }
+        .theme-home .content-section {
+          position: relative;
+          z-index: 1;
+          animation: fadeInUp 0.8s ease forwards;
         }
 
         .theme-projects {
-          background: #fffbeb;
+          background: linear-gradient(135deg, #afc8deff 0%, #0a2d65ff 100%);
+          color: #0e3b77ff;
+        }
+        .theme-projects::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f59e0b' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+          background-size: cover;
+          background-position: center;
+          animation: waveAnimation 20s linear infinite;
+        }
+        
+        .theme-projects .content-section {
+          position: relative;
+          z-index: 1;
+          animation: fadeInUp 0.8s ease forwards;
         }
 
         .theme-experience {
-          background: #f0fdf4;
+          background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+          color: #1e293b;
+          position: relative;
+          overflow:;
+        }
+        
+        .theme-experience::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f59e0b' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+          background-size: cover;
+          background-position: center;
+          animation: waveAnimation 20s linear infinite;
+        }
+        
+        .theme-experience .content-section {
+          position: relative;
+          z-index: 1;
+          animation: fadeInUp 0.8s ease forwards;
         }
 
         .theme-skills {
-          background: #fdf4ff;
+          background: linear-gradient(135deg, #09476eff 0%, #003b65ff 100%);
+          color: #e2e8f0;
+          perspective: 1000px;
+        }
+        
+        .theme-skills::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f59e0b' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+          background-size: cover;
+          background-position: center;
+          animation: waveAnimation 20s linear infinite;
+        }
+        
+        .theme-skills .content-section {
+          position: relative;
+          z-index: 1;
+          animation: fadeInUp 0.8s ease forwards;
         }
 
         .theme-education {
-          background: #eff6ff;
+          background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+          color: #1e293b;
+          position: relative;
         }
         
+        .theme-education::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url("https://i.pinimg.com/originals/e3/9e/94/e39e946cbfa7837b8098d41dad288e54.gif");
+          background-size: cover;
+          background-position: center;
+          opacity: 0.1;
+        }
+        
+        .theme-education::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: 
+            radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.2) 0%, transparent 30%),
+            radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.2) 0%, transparent 30%);
+          animation: pulse 10s ease-in-out infinite;
+        }
+                  }        
         .content-wrapper {
-          max-width: 900px;
+          max-width: 800px;
           margin: 0 auto;
           padding: 20px;
+          animation: fadeInUp 0.8s ease forwards;
         }
         
         .about-container {
@@ -602,7 +719,8 @@ export default function Home() {
         .about-text p {
           margin-bottom: 20px;
           line-height: 1.6;
-          color: #374151;
+          color: inherit;
+          opacity: 0.9;
         }
         
         .hero-heading {
@@ -611,6 +729,7 @@ export default function Home() {
           margin-bottom: 30px;
           text-align: center;
           line-height: 1.2;
+          font-family: 'Poetsen One', cursive;
         }
         
         .section-header {
@@ -618,6 +737,58 @@ export default function Home() {
           font-weight: 600;
           margin-bottom: 30px;
           text-align: center;
+          font-family: 'Poetsen One', cursive;
+        }
+        
+        /* Animasi untuk efek scroll */
+        @keyframes fadeInUp {
+          0% {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes waveAnimation {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        
+        @keyframes threeDFlipIn {
+          0% {
+            opacity: 0;
+            transform: rotateX(90deg) translateZ(100px);
+          }
+          100% {
+            opacity: 1;
+            transform: rotateX(0) translateZ(0);
+          }
+        }
+        
+        /* Efek untuk elemen yang muncul saat scroll */
+        .content-section,
+        .hero-section,
+        .experience-item {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: all 0.6s ease;
+        }
+        
+        .content-section.visible,
+        .hero-section.visible,
+        .experience-item.visible {
+          opacity: 1;
+          transform: translateY(0);
         }
         
         /* Menghapus animasi yang tidak perlu */

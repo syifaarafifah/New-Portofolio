@@ -17,17 +17,17 @@ const BubbleBackground = () => {
 
   useEffect(() => {
     // Generate bubbles
-    const newBubbles = Array.from({ length: 15 }, (_, i) => {
+    const newBubbles = Array.from({ length: 15 }, (_) => {
       const size = Math.random() * 60 + 20;
       const top = Math.random() * 100;
       const left = Math.random() * 100;
       const animationDelay = Math.random() * 8;
       const duration = Math.random() * 10 + 10;
-      
+
       const colors = [
-        'rgba(163, 224, 221, 0.15)',  // Warna biru muda yang sesuai dengan tema
-        'rgba(79, 70, 229, 0.15)',    // Warna ungu yang sesuai dengan tema
-        'rgba(255, 255, 255, 0.1)'    // Warna putih transparan
+        'rgba(163, 224, 221, 0.15)',  // Biru muda
+        'rgba(79, 70, 229, 0.15)',    // Ungu
+        'rgba(255, 255, 255, 0.1)'    // Putih transparan
       ];
       const color = colors[Math.floor(Math.random() * colors.length)];
 

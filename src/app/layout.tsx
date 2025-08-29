@@ -1,6 +1,5 @@
 // app/layout.tsx
 import './globals.css';
-import { Inter } from 'next/font/google';
 import Head from 'next/head';
 
 export const metadata = {
