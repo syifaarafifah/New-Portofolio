@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect} from "react";
-import { FaLock,FaCaretLeft } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { FaLock, FaUnlock } from "react-icons/fa";
 
 interface LockScreenProps {
   onUnlock: () => void;
@@ -11,16 +11,26 @@ interface LockScreenProps {
 export default function LockScreen({ onUnlock, isUnlocked }: LockScreenProps) {
   const [currentTime, setCurrentTime] = useState("");
   const [currentDate, setCurrentDate] = useState("");
-  const [pin, setPin] = useState("");
-  const [showPinPad, setShowPinPad] = useState(false);
-  const [attempts, setAttempts] = useState(0);
-  const [error, setError] = useState("");
+  const [isUnlocking, setIsUnlocking] = useState(false);
+  const [isLockHovered, setIsLockHovered] = useState(false);
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(100);
+
+  const roles = [
+    "FRONTEND DEVELOPER",
+    "WEB DEVELOPER", 
+    "MOBILE DEVELOPER",
+    "UI/UX DESIGNER"
+  ];
 
   useEffect(() => {
     // Update time and date
     const updateDateTime = () => {
       const now = new Date();
-      setCurrentTime(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+      const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      setCurrentTime(time);
       setCurrentDate(now.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' }));
     };
 
@@ -30,457 +40,457 @@ export default function LockScreen({ onUnlock, isUnlocked }: LockScreenProps) {
     return () => clearInterval(interval);
   }, []);
 
-  const handleNumberClick = (number: string) => {
-    if (pin.length < 4) {
-      const newPin = pin + number;
-      setPin(newPin);
-      
-      if (newPin.length === 4) {
-        if (newPin === "1234") {
-          // PIN benar
-          setTimeout(() => {
-            onUnlock();
-          }, 500);
-        } else {
-          // PIN salah
-          setError("PIN salah");
-          setAttempts(attempts + 1);
-          setTimeout(() => {
-            setPin("");
-            setError("");
-          }, 1000);
-        }
+  useEffect(() => {
+    // Typing animation effect
+    const currentRole = roles[currentRoleIndex];
+    
+    const handleTyping = () => {
+      if (isDeleting) {
+        // Deleting text
+        setDisplayText(currentRole.substring(0, displayText.length - 1));
+        setTypingSpeed(50);
+      } else {
+        // Typing text
+        setDisplayText(currentRole.substring(0, displayText.length + 1));
+        setTypingSpeed(100);
       }
-    }
+
+      // Check if we've finished typing or deleting
+      if (!isDeleting && displayText === currentRole) {
+        // Pause at the end of typing
+        setTimeout(() => setIsDeleting(true), 1500);
+      } else if (isDeleting && displayText === "") {
+        // Move to next role after deleting
+        setIsDeleting(false);
+        setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+      }
+    };
+
+    const typingTimer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(typingTimer);
+  }, [displayText, isDeleting, currentRoleIndex, roles]);
+
+  const handleUnlock = () => {
+    setIsUnlocking(true);
+    setTimeout(() => {
+      onUnlock();
+    }, 800);
   };
-
-  const handleDelete = () => {
-    if (pin.length > 0) {
-      setPin(pin.slice(0, -1));
-    }
-  };
-
-  const handleOpenPinPad = () => {
-    setShowPinPad(true);
-  };
-
-  const handleClosePinPad = () => {
-    setShowPinPad(false);
-    setPin("");
-    setError("");
-  };
-
-  // Tampilkan pesan jika terlalu banyak percobaan
-  if (attempts >= 3) {
-    return (
-      <div className="lock-screen-overlay">
-        {/* Dynamic Island */}
-        <div className="dynamic-island">
-          <div className="dynamic-dot"></div>
-          <div className="dynamic-dot"></div>
-        </div>
-
-        <div className="too-many-attempts">
-          <FaLock className="lock-icon-large" />
-          <h2>Terlalu Banyak Percobaan</h2>
-          <p>Tunggu 30 detik sebelum mencoba lagi</p>
-        </div>
-
-        <style jsx>{`
-          .lock-screen-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            z-index: 1000;
-            border-radius: 20px;
-            overflow: hidden;
-          }
-                  
-          
-          .too-many-attempts {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-            text-align: center;
-            padding: 20px;
-          }
-          
-          .lock-icon-large {
-            font-size: 50px;
-            margin-bottom: 20px;
-            color: #ff3b30;
-          }
-        `}</style>
-      </div>
-    );
-  }
 
   return (
-    <div className="lock-screen-overlay">
+    <div className={`lock-screen-overlay ${isUnlocking ? "unlocking" : ""}`}>
+      {/* Elegant Background */}
+      <div className="elegant-background">
+        <div className="texture-overlay"></div>
+        <div className="gradient-overlay"></div>
+      </div>
+      
+      {/* Status Bar */}
+      <div className="phone-status-bar">
+        <div className="status-time">{currentTime}</div>
+        <div className="status-icons">
+          <span className="status-icon">📶</span>
+          <span className="status-icon">📡</span>
+          <span className="status-icon">🔋 80%</span>
+        </div>
+      </div>
+
       {/* Dynamic Island */}
       <div className="dynamic-island">
         <div className="dynamic-dot"></div>
         <div className="dynamic-dot"></div>
       </div>
 
-      {/* Full Screen Octopus Background */}
-      <div className="octopus-background">
-        <img 
-          src="https://cdn.dribbble.com/userupload/23395409/file/original-470638bc3554712d2761d256f2f3f414.gif" 
-          alt="Octopus animation background"
-        />
-        <div className="background-overlay"></div>
-      </div>
-
       {/* Lock Screen Content */}
-      {!showPinPad ? (
-        <div className="lock-content">
-          <div className="lock-time">{currentTime}</div>
-          <div className="lock-date">{currentDate}</div>
-          
-          {/* Unlock Button */}
-          <div className="unlock-button-container">
-            <button className="unlock-button" onClick={handleOpenPinPad}>
-              <FaLock className="lock-icon" />
-              <span>Tekan untuk membuka</span>
-            </button>
+      <div className="lock-content">
+        <div className="welcome-container">
+          <div className="welcome-text">WELCOME</div>
+          <div className="role-text">
+            {"I'M"} <span className="typing-text">{displayText}</span><span className="cursor">|</span>
           </div>
         </div>
-      ) : (
-        <div className="pin-pad-container">
-          <div className="pin-pad-header">
-            <button className="back-button" onClick={handleClosePinPad}>
-              <FaCaretLeft />
-            </button>
-            <h3>WELCOME</h3>
-            <div className="placeholder"></div>
-          </div>
-          
-          {/* PIN Dots */}
-          <div className="pin-dots">
-            {[0, 1, 2, 3].map((index) => (
-              <div
-                key={index}
-                className={`pin-dot ${pin.length > index ? "filled" : ""}`}
-              ></div>
-            ))}
-          </div>
-          
-          {/* Error Message */}
-          {error && <div className="error-message">{error}</div>}
-          
-          {/* Number Pad */}
-          <div className="number-pad">
-            <div className="number-row">
-              <button className="number-button" onClick={() => handleNumberClick("1")}>1</button>
-              <button className="number-button" onClick={() => handleNumberClick("2")}>2</button>
-              <button className="number-button" onClick={() => handleNumberClick("3")}>3</button>
+        
+        <div className="time-date-container">
+          <div className="lock-time">{currentTime}</div>
+          <div className="lock-date">{currentDate}</div>
+        </div>
+        
+        {/* Spacer untuk push unlock button ke bawah */}
+        <div className="spacer"></div>
+        
+        {/* Unlock Button */}
+        <div className="unlock-button-container">
+          <button 
+            className="unlock-button" 
+            onClick={handleUnlock}
+            onMouseEnter={() => setIsLockHovered(true)}
+            onMouseLeave={() => setIsLockHovered(false)}
+          >
+            <div className="lock-icon-wrapper">
+              <div className={`lock-icon-circle ${isLockHovered ? 'unlocking' : ''}`}>
+                {isLockHovered ? (
+                  <FaUnlock className="icon unlock-icon" />
+                ) : (
+                  <FaLock className="icon lock-icon" />
+                )}
+              </div>
             </div>
-            <div className="number-row">
-              <button className="number-button" onClick={() => handleNumberClick("4")}>4</button>
-              <button className="number-button" onClick={() => handleNumberClick("5")}>5</button>
-              <button className="number-button" onClick={() => handleNumberClick("6")}>6</button>
-            </div>
-            <div className="number-row">
-              <button className="number-button" onClick={() => handleNumberClick("7")}>7</button>
-              <button className="number-button" onClick={() => handleNumberClick("8")}>8</button>
-              <button className="number-button" onClick={() => handleNumberClick("9")}>9</button>
-            </div>
-            <div className="number-row">
-              <button className="empty-button"></button>
-              <button className="number-button" onClick={() => handleNumberClick("0")}>0</button>
-              <button className="delete-button" onClick={handleDelete}>
-                ⌫
-              </button>
-            </div>
-          </div>
-          
-          <div className="pin-hint">PIN: 1234</div>
+            <span className="unlock-label">Tap to unlock</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Unlock Animation */}
+      {isUnlocking && (
+        <div className="unlock-animation">
+          <div className="animation-circle circle-1"></div>
+          <div className="animation-circle circle-2"></div>
+          <div className="animation-circle circle-3"></div>
         </div>
       )}
 
       <style jsx>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+        
         .lock-screen-overlay {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          color: white;
+          color: #2c2c2c;
           display: flex;
           flex-direction: column;
           z-index: 1000;
-          border-radius: 20px;
+          border-radius: 40px;
           overflow: hidden;
+          font-family: 'Inter', sans-serif;
+          transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 
+                      0 0 0 4px #2c2c2c,
+                      0 0 0 8px #e8e2d6,
+                      0 0 0 12px #2c2c2c;
+        }
+        
+        .lock-screen-overlay.unlocking {
+          transform: translateY(-100%);
+          opacity: 0;
         }
                 
-        
-        .octopus-background {
+        .elegant-background {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
+          background: linear-gradient(135deg, #f8f5f0 0%, #e8e2d6 100%);
           z-index: 1;
           overflow: hidden;
         }
         
-        .octopus-background img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-        
-        .background-overlay {
+        .texture-overlay {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
-          z-index: 2;
+          background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0z' fill='%23f8f5f0'/%3E%3Cpath d='M0 0h50v50H0z' fill='%23e8e2d6' fill-opacity='0.2'/%3E%3C/svg%3E");
+          background-size: 300px 300px;
+          opacity: 0.4;
+        }
+        
+        .gradient-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.4) 0%, transparent 60%),
+                    radial-gradient(circle at 70% 60%, rgba(235, 225, 215, 0.3) 0%, transparent 50%);
+        }
+        
+        /* Status Bar */
+        .phone-status-bar {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          padding: 12px 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          z-index: 15;
+        }
+        
+        .status-time {
+          font-size: 14px;
+          font-weight: 600;
+          color: #2c2c2c;
+        }
+        
+        .status-icons {
+          display: flex;
+          gap: 8px;
+        }
+        
+        .status-icon {
+          font-size: 12px;
+          color: #2c2c2c;
+        }
+        
+        .dynamic-island {
+          position: absolute;
+          top: 15px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 120px;
+          height: 35px;
+          background: #2c2c2c;
+          border-radius: 20px;
+          z-index: 10;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+        }
+        
+        .dynamic-dot {
+          width: 8px;
+          height: 8px;
+          background: #5a5a5a;
+          border-radius: 50%;
         }
         
         .lock-content {
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
+          justify-content: space-between;
           flex: 1;
-          padding: 60px 20px 30px;
+          padding: 100px 20px 80px;
           position: relative;
           z-index: 5;
         }
         
-        .lock-time {
-          font-size: 60px;
-          font-weight: 700;
+        .welcome-container {
+          text-align: center;
+          margin-top: 30px;
+        }
+        
+        .welcome-text {
+          font-size: 32px;
+          font-weight: 400;
+          letter-spacing: 4px;
+          color: #2c2c2c;
+          font-family: 'Playfair Display', serif;
           margin-bottom: 10px;
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+          text-transform: uppercase;
+        }
+        
+        .role-text {
+          font-size: 16px;
+          font-weight: 400;
+          opacity: 0.7;
+          color: #5a5a5a;
           letter-spacing: 1px;
+          min-height: 24px;
+        }
+        
+        .typing-text {
+          font-weight: 500;
+          color: #3a3a3a;
+        }
+        
+        .cursor {
+          animation: blink 1s infinite;
+          color: #3a3a3a;
+          font-weight: 500;
+        }
+        
+        @keyframes blink {
+          0%, 50% { opacity: 1; }
+          51%, 100% { opacity: 0; }
+        }
+        
+        .time-date-container {
+          text-align: center;
+          margin-top: 20px;
+        }
+        
+        .lock-time {
+          font-size: 72px;
+          font-weight: 300;
+          margin-bottom: 8px;
+          letter-spacing: -1px;
+          color: #2c2c2c;
+          font-family: 'Playfair Display', serif;
         }
         
         .lock-date {
           font-size: 18px;
-          font-weight: 500;
-          opacity: 0.9;
-          margin-bottom: 40px;
-          text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
+          font-weight: 400;
+          opacity: 0.7;
+          color: #5a5a5a;
+          letter-spacing: 1px;
+        }
+        
+        .spacer {
+          flex: 1;
         }
         
         .unlock-button-container {
-          margin-top: auto;
           margin-bottom: 40px;
+          margin-top: 20px;
         }
         
         .unlock-button {
           display: flex;
           flex-direction: column;
           align-items: center;
-          background: rgba(255, 255, 255, 0.2);
-          border: 1px solid rgba(255, 255, 255, 0.4);
+          background: rgba(255, 255, 255, 0.7);
+          border: 1px solid rgba(255, 255, 255, 0.9);
           border-radius: 50px;
-          padding: 15px 30px;
-          color: white;
-          backdrop-filter: blur(10px);
+          padding: 20px 40px;
+          color: #2c2c2c;
+          backdrop-filter: blur(20px);
           cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+          transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+          box-shadow: 
+            0 4px 20px rgba(0, 0, 0, 0.05),
+            0 1px 3px rgba(0, 0, 0, 0.05),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.8);
         }
         
         .unlock-button:hover {
-          background: rgba(255, 255, 255, 0.3);
           transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+          box-shadow: 
+            0 6px 25px rgba(0, 0, 0, 0.08),
+            0 2px 5px rgba(0, 0, 0, 0.05),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.9);
         }
         
-        .lock-icon {
-          font-size: 20px;
-          margin-bottom: 8px;
-          filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
-        }
-        
-        .pin-pad-container {
+        .lock-icon-wrapper {
+          margin-bottom: 12px;
           display: flex;
-          flex-direction: column;
+          justify-content: center;
           align-items: center;
-          justify-content: space-between;
-          flex: 1;
-          padding: 80px 20px 40px;
-          position: relative;
-          z-index: 5;
         }
         
-        .pin-pad-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-          margin-bottom: 40px;
-        }
-        
-        .back-button {
-          background: none;
-          border: none;
-          color: white;
-          font-size: 24px;
-          cursor: pointer;
-          padding: 10px;
-          opacity: 0.8;
-          transition: opacity 0.2s ease;
-          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-        }
-        
-        .back-button:hover {
-          opacity: 1;
-        }
-        
-        .pin-pad-header h3 {
-          margin: 0;
-          font-weight: 600;
-          font-size: 18px;
-          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-        }
-        
-        .placeholder {
-          width: 34px;
-        }
-        
-        .pin-dots {
-          display: flex;
-          gap: 20px;
-          margin-bottom: 30px;
-        }
-        
-        .pin-dot {
-          width: 18px;
-          height: 18px;
+        .lock-icon-circle {
+          width: 60px;
+          height: 60px;
           border-radius: 50%;
-          border: 2px solid rgba(255, 255, 255, 0.7);
-          transition: all 0.2s ease;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        }
-        
-        .pin-dot.filled {
-          background-color: white;
-          border-color: white;
-          box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-        
-        .error-message {
-          color: #ff6b6b;
-          margin-bottom: 20px;
-          font-size: 14px;
-          height: 20px;
-          font-weight: 500;
-          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        
-        .number-pad {
-          width: 100%;
-          max-width: 300px;
-        }
-        
-        .number-row {
+          background: rgba(44, 44, 44, 0.1);
           display: flex;
-          justify-content: space-between;
-          margin-bottom: 20px;
+          justify-content: center;
+          align-items: center;
+          transition: all 0.3s ease;
         }
         
-        .number-button {
-          width: 70px;
-          height: 70px;
-          border-radius: 35px;
-          border: none;
-          background: rgba(255, 255, 255, 0.15);
-          color: white;
+        .unlock-button:hover .lock-icon-circle {
+          background: rgba(44, 44, 44, 0.15);
+          transform: scale(1.05);
+        }
+        
+        .lock-icon-circle.unlocking {
+          background: rgba(44, 44, 44, 0.15);
+          transform: scale(1.05);
+        }
+        
+        .icon {
           font-size: 24px;
+          color: #2c2c2c;
+          transition: all 0.3s ease;
+        }
+        
+        .unlock-label {
+          font-size: 14px;
           font-weight: 500;
-          cursor: pointer;
-          backdrop-filter: blur(10px);
-          transition: all 0.2s ease;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-          margin: 3px;
-          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+          letter-spacing: 0.5px;
         }
         
-        .number-button:hover {
-          background: rgba(255, 255, 255, 0.25);
-          transform: scale(1.05);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        /* Unlock Animation */
+        .unlock-animation {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 20;
+          pointer-events: none;
         }
         
-        .empty-button {
-          width: 70px;
-          height: 70px;
-          visibility: hidden;
+        .animation-circle {
+          position: absolute;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+          animation: expand 0.8s ease-out forwards;
         }
         
-        .delete-button {
-          width: 70px;
-          height: 70px;
-          border-radius: 35px;
-          border: none;
-          background: rgba(255, 255, 255, 0.15);
-          color: white;
-          font-size: 24px;
-          cursor: pointer;
-          backdrop-filter: blur(10px);
-          transition: all 0.2s ease;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        .circle-1 {
+          width: 80px;
+          height: 80px;
+          animation-delay: 0s;
         }
         
-        .delete-button:hover {
-          background: rgba(255, 255, 255, 0.25);
-          transform: scale(1.05);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        .circle-2 {
+          width: 120px;
+          height: 120px;
+          animation-delay: 0.1s;
         }
         
-        .pin-hint {
-          margin-top: 20px;
-          font-size: 12px;
-          opacity: 0.8;
-          background: rgba(0, 0, 0, 0.4);
-          padding: 6px 12px;
-          border-radius: 12px;
-          backdrop-filter: blur(10px);
-          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        .circle-3 {
+          width: 160px;
+          height: 160px;
+          animation-delay: 0.2s;
         }
         
-        @keyframes float {
-          0% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-15px) rotate(5deg); }
-          100% { transform: translateY(0) rotate(0deg); }
+        @keyframes expand {
+          0% {
+            transform: scale(0);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(4);
+            opacity: 0;
+          }
         }
         
         @media (max-width: 480px) {
           .lock-time {
-            font-size: 50px;
+            font-size: 60px;
           }
           
           .lock-date {
             font-size: 16px;
           }
           
-          .number-button, .empty-button, .delete-button {
-            width: 60px;
-            height: 60px;
-            border-radius: 30px;
-            font-size: 22px;
+          .welcome-text {
+            font-size: 28px;
           }
           
-          .pin-pad-header h3 {
-            font-size: 16px;
+          .role-text {
+            font-size: 14px;
+          }
+          
+          .unlock-button {
+            padding: 18px 36px;
+          }
+          
+          .lock-icon-circle {
+            width: 50px;
+            height: 50px;
+          }
+          
+          .icon {
+            font-size: 20px;
+          }
+          
+          .phone-status-bar {
+            padding: 10px 15px;
           }
         }
       `}</style>

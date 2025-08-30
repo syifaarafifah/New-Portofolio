@@ -375,7 +375,7 @@ export default function Home() {
               </a>
               {/* Menu Resume Baru */}
               <a
-                href="/CV - Syifa Rafifah (6).pdf"
+                href="https://rb.gy/mt0ynk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="app-item"
@@ -577,8 +577,8 @@ export default function Home() {
         }
 
         .theme-projects {
-          background: linear-gradient(135deg, #afc8deff 0%, #0a2d65ff 100%);
-          color: #0e3b77ff;
+          background: linear-gradient(135deg, #ffffffff 0%, #bedff6ff 100%);
+          color: #ccdff8ff;
         }
         .theme-projects::before {
           content: "";
@@ -641,7 +641,7 @@ export default function Home() {
           right: 0;
           bottom: 0;
           background: 
-            url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%233B82F6' fill-opacity='0.1'%3E%3Cpath d='M0 0h10v10H0V0zm10 10h10v10H10V10z'/%3E%3C/g%3E%3C/svg%3E");
+            url("https://img.pikbest.com/backgrounds/20190716/gif-dark-blue-lines-technology-sense-glowing-background-image-psd_2835555.jpg!w700wp");
           animation: backgroundMove 15s linear infinite;
         }
         
