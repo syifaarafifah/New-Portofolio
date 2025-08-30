@@ -626,9 +626,11 @@ export default function Home() {
         }
 
         .theme-skills {
-          background: linear-gradient(135deg, #09476eff 0%, #003b65ff 100%);
+          background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
           color: #e2e8f0;
           perspective: 1000px;
+          position: relative;
+          overflow: hidden;
         }
         
         .theme-skills::before {
@@ -638,16 +640,22 @@ export default function Home() {
           left: 0;
           right: 0;
           bottom: 0;
-          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f59e0b' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-          background-size: cover;
-          background-position: center;
-          animation: waveAnimation 20s linear infinite;
+          background: 
+            url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%233B82F6' fill-opacity='0.1'%3E%3Cpath d='M0 0h10v10H0V0zm10 10h10v10H10V10z'/%3E%3C/g%3E%3C/svg%3E");
+          animation: backgroundMove 15s linear infinite;
         }
         
-        .theme-skills .content-section {
-          position: relative;
-          z-index: 1;
-          animation: fadeInUp 0.8s ease forwards;
+        .theme-skills::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: 
+            radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 25%),
+            radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 25%);
+          animation: pulse 8s ease-in-out infinite;
         }
 
         .theme-education {
@@ -790,21 +798,7 @@ export default function Home() {
           opacity: 1;
           transform: translateY(0);
         }
-        
-        /* Menghapus animasi yang tidak perlu */
-        .balloon-container,
-        .birds-natural-container,
-        .chicken-animation,
-        .floating-clouds,
-        .sun-large,
-        .floating-hearts,
-        .floating-tools,
-        .floating-briefcases,
-        .floating-stars,
-        .floating-books {
-          display: none;
-        }
-      `}</style>
+        `}</style>
     </div>
   );
 }

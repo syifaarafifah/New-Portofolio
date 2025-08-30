@@ -47,7 +47,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
       <div className="projects-container">
         <div className="section-header">
           <h2 className="projects-title">
-            <span className="title-accent">My</span> Projects
+            <span className="title-accent">Projects</span> 
           </h2>
           <div className="title-underline"></div>
           <p className="projects-subtitle">A showcase of my recent work and creations</p>
@@ -180,8 +180,8 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           transform: translateY(20px);
           transition: opacity 0.6s ease, transform 0.6s ease;
           padding: 4rem 1.5rem;
-          background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-          color: #e2e8f0;
+          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+          color: #334155;
           font-family: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
           position: relative;
           overflow: hidden;
@@ -189,7 +189,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           max-width: 1000px;
           margin: 0 auto;
           border-radius: 16px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         
         .projects-section.visible {
@@ -212,14 +212,14 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           position: absolute;
           border-radius: 50%;
           filter: blur(60px);
-          opacity: 0.15;
+          opacity: 0.1;
           animation: float 15s infinite ease-in-out;
         }
         
         .bg-ball-1 {
           width: 250px;
           height: 250px;
-          background: rgba(30, 64, 175, 0.6);
+          background: rgba(59, 130, 246, 0.4);
           top: 10%;
           left: 5%;
           animation-delay: 0s;
@@ -229,7 +229,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         .bg-ball-2 {
           width: 300px;
           height: 300px;
-          background: rgba(100, 116, 139, 0.6);
+          background: rgba(100, 116, 139, 0.3);
           bottom: 15%;
           right: 5%;
           animation-delay: -5s;
@@ -239,7 +239,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         .bg-ball-3 {
           width: 200px;
           height: 200px;
-          background: rgba(30, 64, 175, 0.5);
+          background: rgba(59, 130, 246, 0.3);
           top: 50%;
           left: 20%;
           animation-delay: -10s;
@@ -249,7 +249,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         .bg-ball-4 {
           width: 270px;
           height: 270px;
-          background: rgba(100, 116, 139, 0.5);
+          background: rgba(100, 116, 139, 0.2);
           bottom: 5%;
           left: 30%;
           animation-delay: -7s;
@@ -269,9 +269,9 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         
         .particle {
           position: absolute;
-          background: linear-gradient(135deg, #1e40af, #4b5563);
+          background: linear-gradient(135deg, #3b82f6, #94a3b8);
           border-radius: 50%;
-          opacity: 0.4;
+          opacity: 0.3;
           animation: floatParticle var(--duration) infinite ease-in-out;
           animation-delay: var(--delay);
           width: var(--size);
@@ -283,10 +283,10 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         @keyframes floatParticle {
           0% {
             transform: translateY(0) rotate(0deg);
-            opacity: 0.4;
+            opacity: 0.3;
           }
           50% {
-            opacity: 0.7;
+            opacity: 0.5;
           }
           100% {
             transform: translateY(100vh) rotate(360deg);
@@ -322,7 +322,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           font-size: 3rem;
           font-weight: 800;
           margin-bottom: 0.5rem;
-          background: linear-gradient(135deg, #b0d4ffff, #4aa4e3ff);
+          background: linear-gradient(135deg, #1e40af, #3b82f6);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           font-family: 'Montserrat', sans-serif;
@@ -332,14 +332,14 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         }
         
         .title-accent {
-          color: #f8fafc;
-          -webkit-text-fill-color: #f8fafc;
+          color: #1e40af;
+          -webkit-text-fill-color: #2769a6;
         }
         
         .title-underline {
           width: 100px;
           height: 4px;
-          background: linear-gradient(90deg, #1e40af, #6b7280);
+          background: linear-gradient(90deg, #3b82f6, #94a3b8);
           margin: 0.5rem auto 1rem;
           border-radius: 2px;
         }
@@ -347,7 +347,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         .projects-subtitle {
           font-size: 1.1rem;
           margin-bottom: 2.5rem;
-          color: #cbd5e1;
+          color: #64748b;
           font-weight: 400;
           max-width: 500px;
           line-height: 1.6;
@@ -358,12 +358,12 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           display: inline-flex;
           gap: 0.5rem;
           margin-bottom: 3rem;
-          background: rgba(45, 55, 72, 0.7);
+          background: rgba(255, 255, 255, 0.8);
           border-radius: 12px;
           padding: 0.4rem;
           backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
         
         .tab-button {
@@ -371,7 +371,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           border: none;
           padding: 0.7rem 1.5rem;
           border-radius: 8px;
-          color: #ecf8feff;
+          color: #64748b;
           font-family: inherit;
           font-size: 0.9rem;
           cursor: pointer;
@@ -383,14 +383,14 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         }
         
         .tab-button:hover {
-          color: #7cb2e9ff;
-          background: rgba(5, 112, 194, 0.1);
+          color: #3b82f6;
+          background: rgba(59, 130, 246, 0.1);
         }
         
         .tab-button.active {
           color: #ffffff;
-          background: linear-gradient(135deg, #1e40af, #6b7280);
-          box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+          background: linear-gradient(135deg, #3b82f6, #60a5fa);
+          box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
         }
         
         .projects-list {
@@ -400,16 +400,16 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         }
         
         .project-card {
-          background: rgba(45, 55, 72, 0.7);
+          background: rgba(255, 255, 255, 0.9);
           border-radius: 16px;
           padding: 1.5rem;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.8);
           transition: all 0.3s ease;
           opacity: 0;
           transform: translateY(20px);
           animation: fadeInUp 0.6s ease forwards;
           backdrop-filter: blur(10px);
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
           position: relative;
           overflow: hidden;
         }
@@ -420,20 +420,20 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(45deg, #1e40af, #6b7280, #374151);
+          background: linear-gradient(45deg, #3b82f6, #93c5fd, #dbeafe);
           opacity: 0;
           transition: opacity 0.3s ease;
           z-index: -1;
         }
         
         .project-card:hover {
-          border-color: rgba(30, 64, 175, 0.3);
+          border-color: rgba(59, 130, 246, 0.3);
           transform: translateY(-5px);
-          box-shadow: 0 15px 30px rgba(30, 64, 175, 0.2);
+          box-shadow: 0 15px 30px rgba(59, 130, 246, 0.15);
         }
         
         .project-card:hover .card-glow {
-          opacity: 0.1;
+          opacity: 0.05;
         }
         
         .project-header {
@@ -447,14 +447,11 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           font-size: 1.4rem;
           font-weight: 700;
           margin: 0 0 0.25rem 0;
-          color: #f8fafc;
-          background: linear-gradient(135deg, #1e40af, #9ca3af);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          color: #1e40af;
         }
         
         .project-role {
-          color: #e2e8f0;
+          color: #64748b;
           font-size: 0.9rem;
           margin: 0;
           font-weight: 500;
@@ -475,19 +472,19 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(45, 55, 72, 0.7);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.8);
+          border: 1px solid rgba(59, 130, 246, 0.1);
         }
         
         .project-link:hover {
-          color: #1e40af;
+          color: #3b82f6;
           transform: translateY(-2px);
-          background: rgba(30, 64, 175, 0.1);
-          box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+          background: rgba(59, 130, 246, 0.1);
+          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
         }
         
         .project-description p {
-          color: #e2e8f0;
+          color: #475569;
           line-height: 1.6;
           margin-bottom: 0.75rem;
           font-size: 0.95rem;
@@ -501,13 +498,13 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         }
         
         .tech-tag {
-          background: linear-gradient(135deg, rgba(30, 64, 175, 0.2), rgba(107, 114, 128, 0.2));
-          color: #e2e8f0;
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(100, 116, 139, 0.1));
+          color: #475569;
           padding: 0.35rem 0.8rem;
           border-radius: 20px;
           font-size: 0.8rem;
           font-weight: 500;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(59, 130, 246, 0.1);
           backdrop-filter: blur(5px);
         }
         
@@ -524,9 +521,9 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         }
         
         .album-filter {
-          background: rgba(45, 55, 72, 0.7);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          color: #cbd5e1;
+          background: rgba(255, 255, 255, 0.8);
+          border: 1px solid rgba(59, 130, 246, 0.1);
+          color: #64748b;
           padding: 0.5rem 1.25rem;
           border-radius: 20px;
           font-family: inherit;
@@ -535,20 +532,20 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           transition: all 0.3s ease;
           backdrop-filter: blur(10px);
           font-weight: 500;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
         
         .album-filter:hover {
-          color: #f1f5f9;
-          border-color: rgba(30, 64, 175, 0.3);
+          color: #3b82f6;
+          border-color: rgba(59, 130, 246, 0.3);
           transform: translateY(-2px);
         }
         
         .album-filter.active {
-          background: linear-gradient(135deg, #1e40af, #6b7280);
+          background: linear-gradient(135deg, #3b82f6, #60a5fa);
           color: #ffffff;
-          border-color: rgba(30, 64, 175, 0.4);
-          box-shadow: 0 6px 15px rgba(30, 64, 175, 0.3);
+          border-color: rgba(59, 130, 246, 0.4);
+          box-shadow: 0 6px 15px rgba(59, 130, 246, 0.2);
         }
         
         .gallery-grid {
@@ -558,24 +555,24 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         }
         
         .gallery-item {
-          background: rgba(45, 55, 72, 0.7);
+          background: rgba(255, 255, 255, 0.9);
           border-radius: 16px;
           overflow: hidden;
           position: relative;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.8);
           height: 200px;
           opacity: 0;
           transform: translateY(20px);
           animation: fadeInUp 0.6s ease forwards;
           transition: all 0.3s ease;
           backdrop-filter: blur(10px);
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
         }
         
         .gallery-item:hover {
           transform: translateY(-5px);
-          border-color: rgba(30, 64, 175, 0.3);
-          box-shadow: 0 15px 30px rgba(30, 64, 175, 0.2);
+          border-color: rgba(59, 130, 246, 0.2);
+          box-shadow: 0 15px 30px rgba(59, 130, 246, 0.15);
         }
         
         .gallery-item-inner {
@@ -596,14 +593,14 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           align-items: center;
           justify-content: center;
           font-size: 2.5rem;
-          color: rgba(30, 64, 175, 0.3);
-          background: rgba(45, 55, 72, 0.5);
+          color: rgba(59, 130, 246, 0.2);
+          background: rgba(255, 255, 255, 0.5);
           transition: all 0.3s ease;
         }
         
         .gallery-item:hover .gallery-image-placeholder {
           transform: scale(1.05);
-          color: rgba(30, 64, 175, 0.5);
+          color: rgba(59, 130, 246, 0.3);
         }
         
         .gallery-item-overlay {
@@ -611,7 +608,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           bottom: 0;
           left: 0;
           right: 0;
-          background: linear-gradient(transparent, rgba(45, 55, 72, 0.95));
+          background: linear-gradient(transparent, rgba(255, 255, 255, 0.95));
           padding: 1.5rem;
           opacity: 0;
           transform: translateY(10px);
@@ -621,13 +618,13 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         
         .gallery-item-overlay h4 {
           margin: 0 0 0.5rem 0;
-          color: #ffffff;
+          color: #1e40af;
           font-size: 1.1rem;
           font-weight: 700;
         }
         
         .tech-type {
-          color: #e2e8f0;
+          color: #64748b;
           font-size: 0.85rem;
           margin: 0 0 1rem 0;
           font-weight: 500;
@@ -639,7 +636,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         }
         
         .gallery-links a {
-          color: #ffffff;
+          color: #3b82f6;
           text-decoration: none;
           font-size: 0.85rem;
           display: flex;
@@ -649,14 +646,15 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           font-weight: 500;
           padding: 0.4rem 0.8rem;
           border-radius: 20px;
-          background: rgba(30, 64, 175, 0.2);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(59, 130, 246, 0.1);
+          border: 1px solid rgba(59, 130, 246, 0.1);
         }
         
         .gallery-links a:hover {
-          background: linear-gradient(135deg, #1e40af, #6b7280);
+          background: linear-gradient(135deg, #3b82f6, #60a5fa);
+          color: #ffffff;
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
         }
         
         @keyframes fadeInUp {
@@ -694,6 +692,16 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           .bg-ball-1, .bg-ball-2, .bg-ball-3, .bg-ball-4 {
             display: none;
           }
+          .gallery-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+          transform: scale(1.05);
+        }
         }
       `}</style>
     </section>
